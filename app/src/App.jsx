@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
-    <Router>
+   
        <div className="flex flex-col min-h-screen">
         <Header />
         
@@ -37,7 +37,7 @@ function App() {
         {/* Footer stays at bottom */}
         <Footer />
       </div>
-    </Router>
+    
     </div>
   )
 }

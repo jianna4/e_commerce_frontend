@@ -11,7 +11,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://127.0.0.1:8000/api/auth/register/',
+        'http://127.0.0.1:8000/api/register/',
         {
           full_name: form.full_name,
           email: form.email,
