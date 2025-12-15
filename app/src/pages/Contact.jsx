@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronDownIcon } from "@heroicons/react/16/solid";
+
 import img from "../assets/logo.png"; // Replace with your image
 
 function Contact() {
