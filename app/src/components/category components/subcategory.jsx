@@ -4,8 +4,16 @@ const SubCategorySection = ({ subcategory }) => {
   return (
     <section>
       <h2 className="text-2xl font-semibold mb-6">
-        {subcategory.name}
-      </h2>
+  {(() => {
+    const words = subcategory.name.split(" ");
+    return (
+      <>
+        <span className="text-black">{words[0]}</span>{" "}
+        <span className="text-green-950">{words.slice(1).join(" ")}</span>
+      </>
+    );
+  })()}
+</h2>
 
       <div
         className="
