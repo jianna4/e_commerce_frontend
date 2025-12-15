@@ -9,7 +9,7 @@ function Header() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/categories/")
+      .get("http://127.0.0.1:8000/products/categories/")
       .then((res) => {
         setCategories(res.data);
       })
@@ -55,7 +55,7 @@ function Header() {
                   <Link
                     key={id}
                     to={`/category/${slug}`}
-                    className="block px-4 py-2 text-sm hover:bg-orange-50"
+                    className="block px-4 py-2 text-sm hover:bg-orange-50 text-black" 
                   >
                     {name}
                   </Link>
