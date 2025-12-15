@@ -103,7 +103,10 @@ const Footer = () => {
 
   {/* Bottom orange section */}
   <div className="bg-[#FFA500] w-full py-6 flex flex-col md:flex-row items-center justify-between px-4 md:px-8">
-    {image}
+    <div>
+    <img src={image} alt="Logo" className="h-10 w-auto " />
+    <span className="text-black font-serif text-lg font-bold">Kikapuu kuu</span>
+    </div>
     <p className="text-gray-900 text-md mt-4 md:mt-0">
       © 2077 Your Company. All rights reserved.
     </p>
