@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import CategoryHero from "../components/hero";
-import SubCategorySection from "../components/SubCategorySection";
+import CategoryHero from "../components/category components/hero";
+import SubCategorySection from "../components/category components/subcategory";
 
 const CategoryDetail = () => {
   const { slug } = useParams(); // from URL
