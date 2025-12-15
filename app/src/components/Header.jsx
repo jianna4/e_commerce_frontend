@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import img from "../assets/logo.png";
+import axios from 'axios';
 
 function Header() {
-  const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [open, setOpen] = useState(false);
 
-  const categories = [
-    "Household Appliances",
-    "Electronics",
-    "Clothing",
-    "Books",
-    "Toys",
-  ];
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/categories/")
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((err) => {
+        console.error("Failed to load categories:", err);
+      });
+  }, []);
+
 
   return (
     <header className="bg-black text-white shadow-md">
@@ -27,29 +33,37 @@ function Header() {
           {/* Right side: Navigation */}
           <nav className="flex items-center gap-6">
 
-            {/* Categories first */}
-            <div className="relative">
-              <button
-                onClick={() => setCategoriesOpen(!categoriesOpen)}
-                className="hover:text-orange-500 transition"
-              >
-                Categories
-              </button>
+             {/* Categories Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => setOpen(true)}
+            onMouseLeave={() => setOpen(false)}
+          >
+            <button className="font-medium hover:text-orange-500">
+              Categories
+            </button>
 
-              {categoriesOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg z-50">
-                  {categories.map((item, index) => (
-                    <Link
-                      key={index}
-                      to={`/category/${item.toLowerCase().replace(/ /g, "-")}`}
-                      className="block px-4 py-2 hover:bg-gray-100"
-                    >
-                      {item}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+            {open && (
+              <div className="absolute left-0 mt-2 w-56 bg-white border rounded-md shadow-lg z-50">
+                {categories.length === 0 && (
+                  <p className="px-4 py-2 text-sm text-gray-500">
+                    No categories available
+                  </p>
+                )}
+
+                {categories.map(({ id, name, slug }) => (
+                  <Link
+                    key={id}
+                    to={`/category/${slug}`}
+                    className="block px-4 py-2 text-sm hover:bg-orange-50"
+                  >
+                    {name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
 
             {/* Other nav links */}
             <Link to="/" className="hover:text-orange-500 transition">Home</Link>
