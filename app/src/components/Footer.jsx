@@ -1,7 +1,7 @@
 import React from "react";
 // You can optionally import badge images here
 // import NewBadge from "@/assets/new-badge.svg";
-
+import image from "../assets/logo.png";
 const footerNavList = [
   {
     label: "Product",
@@ -73,48 +73,43 @@ const footerNavList = [
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 py-12 md:py-16">
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <nav>
-          <ul className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
-            {footerNavList.map((category) => (
-              <li key={category.label}>
-                <h4 className="text-sm font-semibold text-gray-800">
-                  {category.label}
-                </h4>
-                <ul className="mt-4 flex flex-col gap-2">
-                  {category.items.map((item) => (
-                    <li key={item.label}>
-                      <a
-                        href={item.href}
-                        className="text-gray-600 hover:text-gray-900 transition"
-                      >
-                        {item.label}
-                        {/* Example for badge if you want */}
-                        {/* {item.badge && (
-                          <img
-                            src={item.badge}
-                            alt="New"
-                            className="inline-block h-4 w-auto ml-1"
-                          />
-                        )} */}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ul>
-        </nav>
+    <footer className="text-white">
+  {/* Top green section */}
+  <div className="bg-[#006400] py-12 md:py-16 text-white">
+    <div className="mx-auto max-w-7xl px-4 md:px-8">
+      <nav>
+        <ul className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
+          {footerNavList.map((category) => (
+            <li key={category.label}>
+              <h4 className="text-sm font-semibold">{category.label}</h4>
+              <ul className="mt-4 flex flex-col gap-2">
+                {category.items.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className="text-white hover:text-gray-300 transition"
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
 
-        <div className="mt-12 flex flex-col justify-between gap-6 border-t border-gray-300 pt-8 md:mt-16 md:flex-row md:items-center">
-          {/* Optional logo or brand name */}
-          <p className="text-md text-gray-600">
-            © 2077 Your Company. All rights reserved.
-          </p>
-        </div>
-      </div>
-    </footer>
+  {/* Bottom orange section */}
+  <div className="bg-[#FFA500] w-full py-6 flex flex-col md:flex-row items-center justify-between px-4 md:px-8">
+    {image}
+    <p className="text-gray-900 text-md mt-4 md:mt-0">
+      © 2077 Your Company. All rights reserved.
+    </p>
+  </div>
+</footer>
+
   );
 };
 
