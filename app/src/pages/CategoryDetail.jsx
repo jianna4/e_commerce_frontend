@@ -13,7 +13,7 @@ const CategoryDetail = () => {
     setLoading(true);
 
     axios
-      .get(`http://127.0.0.1:8000/api/categories/${slug}/`)
+      .get(`http://127.0.0.1:8000/products/categories/${slug}/`)
       .then((res) => {
         setCategory(res.data);
         setLoading(false);
