@@ -37,11 +37,9 @@ const CategoryDetail = () => {
       <CategoryHero category={category} />
 
       <div className="max-w-7xl mx-auto px-6 py-12 space-y-16">
-        {category.subcategories.length === 0 && (
-          <p className="text-gray-500">
-            No subcategories available.
-          </p>
-        )}
+       {(!category.subcategories || category.subcategories.length === 0) && (
+       <p className="text-gray-500">No subcategories available.</p>
+          )}
 
         {category.subcategories.map((sub) => (
           <SubCategorySection key={sub.id} subcategory={sub} />
