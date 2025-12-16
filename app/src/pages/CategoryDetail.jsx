@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import CategoryHero from "../components/category components/hero";
 import SubCategorySection from "../components/category components/subcategory";
+import FeaturedProductsCarousel from "../components/category components/Carousell";
 
 const CategoryDetail = () => {
   const { slug } = useParams(); // from URL
@@ -31,10 +32,14 @@ const CategoryDetail = () => {
   if (!category) {
     return <p className="text-center mt-20">Category not found.</p>;
   }
+  const allProducts = category.subcategories.flatMap(sub => sub.products);
+
 
   return (
     <div>
       <CategoryHero category={category} />
+
+      <FeaturedProductsCarousel products={allProducts} />
 
       <div className="max-w-7xl mx-auto px-6 py-12 space-y-16">
        {(!category.subcategories || category.subcategories.length === 0) && (
