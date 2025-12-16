@@ -38,7 +38,7 @@ const ProductCard = ({ product }) => {
 
           <button
             onClick={() => setOpen(true)}
-            className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+            className="w-full bg-[#006400] text-white py-2 rounded hover:bg-green-700"
           >
             Add to Cart
           </button>
@@ -83,7 +83,7 @@ const ProductCard = ({ product }) => {
             )}
 
             {status === "completed" && (
-              <p className="text-green-600 font-medium">
+              <p className="text-[#006400] font-medium">
                 ✅ Payment confirmed (completed)
               </p>
             )}
@@ -99,7 +99,7 @@ const ProductCard = ({ product }) => {
 
               <button
                 onClick={() => setStatus("completed")}
-                className="flex-1 bg-green-600 text-white py-2 rounded hover:bg-green-700"
+                className="flex-1 bg-[#006400] text-white py-2 rounded hover:bg-[#006400]"
               >
                 Confirm Payment
               </button>
