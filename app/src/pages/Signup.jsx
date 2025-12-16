@@ -40,10 +40,11 @@ const Signup = () => {
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="flex min-h-full flex-col justify-center mt-10 px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="sm:mx-au
+        to sm:w-full sm:max-w-sm">
           <img src={img1} alt="Logo" className="mx-auto h-10 w-auto mt-2" />
           <h2 className="mt-10 text-center text-2xl font-bold text-gray-900">
-            Sign up for kikapuu kuu
+            Sign up for BaskitKE
           </h2>
         </div>
 
