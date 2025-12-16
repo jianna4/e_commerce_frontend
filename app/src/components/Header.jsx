@@ -41,6 +41,22 @@ function Header() {
     return user.email?.[0]?.toUpperCase();
   };
 
+  const getInitials = (user) => {
+  if (!user) return "";
+
+  if (user.first_name && user.last_name) {
+    return (
+      user.first_name[0] + user.last_name[0]
+    ).toUpperCase();
+  }
+
+  if (user.username) {
+    return user.username[0].toUpperCase();
+  }
+
+  return "";
+};
+
   return (
     <header className="bg-gray-50 border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-6">
