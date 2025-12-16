@@ -25,7 +25,6 @@ const Signup = () => {
         }
       );
       setError("");
-      alert("Registration successful! Please login.");
       navigate("/login");
     } catch (err) {
       console.error("Signup error:", err.response?.data);
@@ -44,7 +43,7 @@ const Signup = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img src={img1} alt="Logo" className="mx-auto h-10 w-auto mt-2" />
           <h2 className="mt-10 text-center text-2xl font-bold text-gray-900">
-            Sign up for WasteWise
+            Sign up for kikapuu kuu
           </h2>
         </div>
 

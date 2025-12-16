@@ -17,7 +17,7 @@ const Login = () => {
       });
       login(res.data.access); // Store JWT token
       setError(''); // Clear any previous errors
-      alert('Login successful ✅'); // Temporary feedback
+      navigate("/home");
     } catch (err) {
       console.error("Login error:", err.response?.data);
       setError(err.response?.data?.detail || 'Login failed. Check credentials.');
