@@ -29,26 +29,14 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const getInitials = () => {
-    if (!user) return "";
-    if (user.full_name) {
-      return user.full_name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase();
-    }
-    return user.email?.[0]?.toUpperCase();
-  };
-
   const getInitials = (user) => {
-  if (!user) return "";
+    if (!user) return "";
 
-  if (user.first_name && user.last_name) {
-    return (
-      user.first_name[0] + user.last_name[0]
-    ).toUpperCase();
-  }
+    if (user.first_name && user.last_name) {
+      return (
+        user.first_name[0] + user.last_name[0]
+      ).toUpperCase();
+    }
 
   if (user.username) {
     return user.username[0].toUpperCase();
@@ -165,7 +153,7 @@ function Header() {
                 "
                 title={user?.email}
               >
-                {getInitials()}
+                {getInitials(user)}
               </div>
             )}
           </nav>
