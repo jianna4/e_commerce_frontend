@@ -26,9 +26,9 @@ const FeaturedProductsCarousel = ({ products }) => {
           <span className="text-[#006400]">Products</span>
         </h2></div>
 
-        <div className="flex gap-4 h-100 overflow-hidden">
+        <div className="flex gap-4 h-100 overflow-hidden w-10/12 mt-6 mx-auto">
           {/* Left: Big product */}
-          <div className=" w-1/2 h-64 md:h-80 relative rounded-lg shadow-lg overflow-hidden">
+          <div className=" w-1/3 h-64 md:h-80 relative rounded-lg shadow-lg overflow-hidden">
             <img
               src={getProduct(currentIndex).image
                 ? getProduct(currentIndex).image.startsWith("http")
@@ -45,11 +45,11 @@ const FeaturedProductsCarousel = ({ products }) => {
           </div>
 
           {/* Right: Two smaller products */}
-          <div className="flex flex-col gap-4 w-1/2">
+          <div className="flex flex-col gap-4 pl-6 w-1/2">
             {[1, 2].map((offset) => {
               const product = getProduct(currentIndex + offset);
               return (
-                <div key={offset} className="flex-1 relative rounded-lg shadow overflow-hidden h-28 md:h-36">
+                <div key={offset} className="flex-1 relative border-gray-800 rounded-lg shadow overflow-hidden h-28 md:h-36">
                   <img
                     src={product.image
                       ? product.image.startsWith("http")
