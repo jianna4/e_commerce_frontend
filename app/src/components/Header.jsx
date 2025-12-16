@@ -50,7 +50,7 @@ function Header() {
           <div className="flex items-center gap-3">
             <img src={img} alt="Logo" className="h-9 w-9" />
             <span className="text-xl font-bold text-orange-500">
-              Kikapu Kuu
+              BaskitKE
             </span>
           </div>
 
