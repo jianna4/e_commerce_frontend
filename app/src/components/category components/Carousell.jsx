@@ -1,55 +1,71 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+const BASE_URL = "http://127.0.0.1:8000"; // your backend base URL
 
 const FeaturedProductsCarousel = ({ products }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Carousel auto-scroll every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % products.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [products.length]);
+
   if (!products || products.length === 0) return null;
 
-  // We will only show the first 3 for now, but can expand with scrolling later
-  const [bigProduct, ...smallProducts] = products;
+  const getProduct = (index) => products[index % products.length];
 
   return (
-    <section className="bg-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Title */}
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">
-          Discover Our Top Picks
+    <section className="bg-gray-100 py-8">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+          <span className="text-black">Featured</span>{" "}
+          <span className="text-[#006400]">Products</span>
         </h2>
 
-        {/* Carousel */}
-        <div className="grid grid-cols-3 gap-6">
-          {/* Big Product */}
-          {bigProduct && (
-            <div className="col-span-2 row-span-2 relative rounded-xl overflow-hidden shadow-lg">
-              <img
-                src={bigProduct.image}
-                alt={bigProduct.name}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 bg-black/40 p-4 text-white">
-                <h3 className="text-xl font-bold">{bigProduct.name}</h3>
-                <p className="text-sm">{bigProduct.description}</p>
-              </div>
+        <div className="flex gap-4 overflow-hidden">
+          {/* Left: Big product */}
+          <div className="flex-shrink-0 w-1/2 h-64 md:h-80 relative rounded-lg shadow-lg overflow-hidden">
+            <img
+              src={getProduct(currentIndex).image
+                ? getProduct(currentIndex).image.startsWith("http")
+                  ? getProduct(currentIndex).image
+                  : `${BASE_URL}${getProduct(currentIndex).image}`
+                : "/placeholder.png"}
+              alt={getProduct(currentIndex).name}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 bg-black/50 text-white p-3 w-full">
+              <h3 className="font-semibold text-sm md:text-base">{getProduct(currentIndex).name}</h3>
+              <p className="text-xs md:text-sm line-clamp-2">{getProduct(currentIndex).description}</p>
             </div>
-          )}
+          </div>
 
-          {/* Two smaller products */}
-          {smallProducts.slice(0, 2).map((product) => (
-            <div
-              key={product.id}
-              className="flex flex-col justify-end relative rounded-xl overflow-hidden shadow-lg"
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-1/2 object-cover"
-              />
-              <div className="bg-white/90 p-2">
-                <h4 className="font-semibold text-gray-900 text-sm">
-                  {product.name}
-                </h4>
-                <p className="text-xs text-gray-600">{product.description}</p>
-              </div>
-            </div>
-          ))}
+          {/* Right: Two smaller products */}
+          <div className="flex flex-col gap-4 w-1/2">
+            {[1, 2].map((offset) => {
+              const product = getProduct(currentIndex + offset);
+              return (
+                <div key={offset} className="flex-1 relative rounded-lg shadow overflow-hidden h-28 md:h-36">
+                  <img
+                    src={product.image
+                      ? product.image.startsWith("http")
+                        ? product.image
+                        : `${BASE_URL}${product.image}`
+                      : "/placeholder.png"}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 bg-black/40 text-white p-2 w-full">
+                    <h3 className="font-medium text-xs md:text-sm">{product.name}</h3>
+                    <p className="text-[10px] md:text-xs line-clamp-1">{product.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
