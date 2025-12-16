@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import img from "../assets/logo.png";
 import axios from "axios";
+import img from "../assets/logo.png";
 import { useAuth } from "../apis/AuthContext";
 
 function Header() {
@@ -18,7 +18,7 @@ function Header() {
       .catch((err) => console.error("Failed to load categories:", err));
   }, []);
 
-  // Close dropdown on outside click
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -29,7 +29,6 @@ function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Get initials (name OR email fallback)
   const getInitials = () => {
     if (!user) return "";
     if (user.full_name) {
@@ -43,29 +42,30 @@ function Header() {
   };
 
   return (
-    <header className="bg-gray-100 border-b shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+    <header className="bg-gray-50 border-b border-gray-200 shadow-sm">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between h-16">
 
           {/* LEFT: Logo */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <img src={img} alt="Logo" className="h-9 w-9" />
-            <h1 className="text-xl font-bold text-orange-500">
+            <span className="text-xl font-bold text-orange-500">
               Kikapu Kuu
-            </h1>
+            </span>
           </div>
 
-          {/* CENTER: Search bar */}
-          <div className="flex-1 flex justify-center px-6">
+          {/* CENTER: Search */}
+          <div className="flex-1 px-10">
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder="Search for products..."
               className="
-                w-full max-w-md
+                w-full max-w-lg
                 px-4 py-2
-                rounded-md
-                border
-                border-gray-300
+                rounded-full
+                border border-gray-300
+                bg-white
+                text-sm
                 focus:outline-none
                 focus:ring-2
                 focus:ring-orange-400
@@ -73,23 +73,23 @@ function Header() {
             />
           </div>
 
-          {/* RIGHT: Nav */}
-          <nav className="flex items-center gap-6">
+          {/* RIGHT: Navigation */}
+          <nav className="flex items-center gap-6 text-sm font-medium text-gray-700">
 
             {/* Categories */}
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setOpen(!open)}
-                className="font-medium text-gray-700 hover:text-orange-500"
+                className="hover:text-orange-500 transition"
               >
                 Categories
               </button>
 
               {open && (
-                <div className="absolute left-0 mt-2 w-56 bg-white border rounded-md shadow-lg z-50">
+                <div className="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border z-50">
                   {categories.length === 0 ? (
-                    <p className="px-4 py-2 text-sm text-gray-500">
-                      No categories available
+                    <p className="px-4 py-3 text-gray-500 text-sm">
+                      No categories
                     </p>
                   ) : (
                     categories.map(({ id, name, slug }) => (
@@ -97,7 +97,13 @@ function Header() {
                         key={id}
                         to={`/category/${slug}`}
                         onClick={() => setOpen(false)}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50"
+                        className="
+                          block px-4 py-2
+                          text-gray-700
+                          hover:bg-orange-50
+                          hover:text-orange-600
+                          transition
+                        "
                       >
                         {name}
                       </Link>
@@ -107,21 +113,31 @@ function Header() {
               )}
             </div>
 
-            <Link to="/" className="text-gray-700 hover:text-orange-500">Home</Link>
+            {/* Other links (RESTORED) */}
+            <Link to="/" className="hover:text-orange-500 transition">
+              Home
+            </Link>
+
+            <Link to="/about" className="hover:text-orange-500 transition">
+              About
+            </Link>
+
+            <Link to="/contact" className="hover:text-orange-500 transition">
+              Contact
+            </Link>
 
             {!isAuthenticated ? (
               <>
-                <Link to="/login" className="text-gray-700 hover:text-orange-500">
+                <Link to="/login" className="hover:text-orange-500 transition">
                   Login
                 </Link>
-                <Link to="/signup" className="text-gray-700 hover:text-orange-500">
+                <Link to="/signup" className="hover:text-orange-500 transition">
                   Signup
                 </Link>
               </>
             ) : (
-              /* USER AVATAR */
+              /* USER AVATAR (far right) */
               <div
-                title={user?.email}
                 className="
                   h-10 w-10
                   rounded-full
@@ -131,12 +147,13 @@ function Header() {
                   font-semibold
                   cursor-pointer
                 "
+                title={user?.email}
               >
                 {getInitials()}
               </div>
             )}
-
           </nav>
+
         </div>
       </div>
     </header>
