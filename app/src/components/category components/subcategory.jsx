@@ -9,7 +9,7 @@ const SubCategorySection = ({ subcategory }) => {
     return (
       <>
         <span className="text-black">{words[0]}</span>{" "}
-        <span className="text-green-950">{words.slice(1).join(" ")}</span>
+        <span className="text-[#006400]">{words.slice(1).join(" ")}</span>
       </>
     );
   })()}
