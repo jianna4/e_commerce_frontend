@@ -18,12 +18,13 @@ const FeaturedProductsCarousel = ({ products }) => {
   const getProduct = (index) => products[index % products.length];
 
   return (
-    <section className="bg-gray-100 py-8">
+    <section className="bg-gray-100 py-2">
       <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
+        <div className="flex justify-center">
+        <h2 className="text-2xl  md:text-3xl font-bold text-gray-900 mb-4">
           <span className="text-black">Featured</span>{" "}
           <span className="text-[#006400]">Products</span>
-        </h2>
+        </h2></div>
 
         <div className="flex gap-4 h-100 overflow-hidden">
           {/* Left: Big product */}
