@@ -30,7 +30,7 @@ const Login = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img src={img1} alt="WasteWise" className="mx-auto h-10 w-auto mt-2" />
           <h2 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">
-            Log in to WasteWise
+            Log in to BaskitKE
           </h2>
         </div>
 
