@@ -25,9 +25,9 @@ const FeaturedProductsCarousel = ({ products }) => {
           <span className="text-[#006400]">Products</span>
         </h2>
 
-        <div className="flex gap-4 overflow-hidden">
+        <div className="flex gap-4 h-100 overflow-hidden">
           {/* Left: Big product */}
-          <div className="flex-shrink-0 w-1/2 h-64 md:h-80 relative rounded-lg shadow-lg overflow-hidden">
+          <div className=" w-1/2 h-64 md:h-80 relative rounded-lg shadow-lg overflow-hidden">
             <img
               src={getProduct(currentIndex).image
                 ? getProduct(currentIndex).image.startsWith("http")
