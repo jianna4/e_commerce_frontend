@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 import img from "../assets/logo.png";
 import { useAuth } from "../apis/AuthContext";
 import api from '../apis/axiosInstance'; //for global axios instance with auth headers
