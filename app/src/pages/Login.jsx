@@ -2,12 +2,13 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../apis/AuthContext';
 import img1 from '../assets/logo.png';
-
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,14 +16,59 @@ const Login = () => {
       const res = await axios.post('http://127.0.0.1:8000/api/login/', form, {
         headers: { 'Content-Type': 'application/json' },
       });
-      login(res.data.tokens.access, res.data.user); // correct
-
-      setError(''); // Clear any previous errors
-      navigate("/home");
-    } catch (err) {
-      console.error("Login error:", err.response?.data);
-      setError(err.response?.data?.detail || 'Login failed. Check credentials.');
+       console.log("Login response:", res.data);
+    
+    if (res.data.tokens?.access && res.data.user) {
+      // Store tokens and user data
+      await login(res.data.tokens.access); // Add await since login is async now
+      console.log("Login successful, navigating to home");
+      navigate("/");
+    } else {
+      // If response doesn't have expected structure
+      setError("Login response missing expected data");
     }
+  } catch (err) {
+    console.error("Full error object:", err);
+    console.error("Error response:", err.response);
+    console.error("Error data:", err.response?.data);
+    console.error("Error status:", err.response?.status);
+    
+    // Check for network errors first
+    if (err.code === 'ERR_NETWORK') {
+      setError('Network error. Please check your connection.');
+      return;
+    }
+    
+    
+    
+    // Handle different error statuses and formats
+    const errorData = err.response.data;
+    
+    if (err.response.status === 400) {
+      if (typeof errorData === 'object') {
+        // Handle object error responses
+        const errors = [];
+        for (const [key, value] of Object.entries(errorData)) {
+          if (Array.isArray(value)) {
+            errors.push(`${key}: ${value.join(', ')}`);
+          } else {
+            errors.push(`${key}: ${value}`);
+          }
+        }
+        setError(errors.join('. '));
+      } else if (typeof errorData === 'string') {
+        setError(errorData);
+      } else {
+        setError('Invalid request. Please check your input.');
+      }
+    } else if (err.response.status === 401) {
+      setError(errorData?.error || errorData?.detail || 'Invalid credentials');
+    } else if (err.response.status === 500) {
+      setError('Server error. Please try again later.');
+    } else {
+      setError(`Error ${err.response.status}: ${errorData?.detail || errorData?.error || 'Login failed'}`);
+    }
+  }
   };
 
   return (
