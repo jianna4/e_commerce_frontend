@@ -1,8 +1,8 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../apis/AuthContext";
 import img1 from "../assets/logo.png";
+import api from '../apis/axiosInstance'; //for global axios instance with auth headers
 
 const Signup = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -13,8 +13,8 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/register/",
+      const response = await api.post(
+        "/api/register/",
         {
           email: form.email,
           full_name: form.name, // must match serializer
