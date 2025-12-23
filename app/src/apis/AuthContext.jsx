@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
-const AuthContext = createContext();
+const AuthContext = createContext();//creates a global context to check for login an auth status
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext); // this reads data from the createcontext
 
 export const AuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(
@@ -22,6 +22,7 @@ export const AuthProvider = ({ children }) => {
   const isAuthenticated = !!accessToken;
 
   return (
+    //provides the data 
     <AuthContext.Provider value={{ accessToken, login, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
