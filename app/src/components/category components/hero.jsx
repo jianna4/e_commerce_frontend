@@ -1,11 +1,12 @@
-const BASE_URL = "http://127.0.0.1:8000";
+
+import api from '../../apis/axiosInstance';
 
 const CategoryHero = ({ category }) => {
   // Handle image URL
   const imageUrl = category.image
     ? category.image.startsWith("http")
       ? category.image
-      : `${BASE_URL}${category.image}`
+      : `${api.defaults.baseURL}${category.image}`
     : "/placeholder.png"; // fallback if no image
 
   return (
