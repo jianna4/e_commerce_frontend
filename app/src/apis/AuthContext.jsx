@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     const fetchUserData = async () => {
       if (accessToken && !user) {
         try {
-          const response = await axiosInstance.get("me/");
+          const response = await axiosInstance.get("api/me/");
           setUser(response.data);
           localStorage.setItem("user", JSON.stringify(response.data));
         } catch (error) {
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     setAccessToken(token);
     // Now fetch user data from backend
     try {
-      const response = await axiosInstance.get("me/");
+      const response = await axiosInstance.get("api/me/");
       setUser(response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
     } catch (error) {
