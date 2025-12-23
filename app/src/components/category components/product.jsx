@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import api from '../../apis/axiosInstance';
 
 const BASE_URL = "http://127.0.0.1:8000";
 
@@ -10,7 +11,7 @@ const ProductCard = ({ product }) => {
   const imageUrl = product.image
     ? product.image.startsWith("http")
       ? product.image
-      : `${BASE_URL}${product.image}`
+      : `${api.defaults.baseURL}${product.image}`
     : "/placeholder.png";
 
   return (
