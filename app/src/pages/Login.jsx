@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useAuth } from '../apis/AuthContext';
 import img1 from '../assets/logo.png';
 import { useNavigate } from "react-router-dom";
+import api from '../apis/axiosInstance'; //for global axios instance with auth headers
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -13,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://127.0.0.1:8000/api/login/', form, {
+      const res = await api.post('/api/login/', form, {
         headers: { 'Content-Type': 'application/json' },
       });
        console.log("Login response:", res.data);
