@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-
+import axiosInstance from "./axiosInstance";
 const AuthContext = createContext();//creates a global context that can store token,login function,logout  and auth state
 
 export const useAuth = () => useContext(AuthContext); // this reads data from the createcontext
@@ -9,19 +9,46 @@ export const useAuth = () => useContext(AuthContext); // this reads data from th
 //now to the brain of auth
 //children are everything wrapped around AuthProvider in main.jsx,in our case its the whole <app />
 export const AuthProvider = ({ children }) => {
-  const [accessToken, setAccessToken] = useState(
-    localStorage.getItem("access_token") || null //initially check if token exists in localstorage and helps restore auth state when page is refreshed or reopened,no useeffect needed
-  );
+  const [user, setUser] = useState(() => {
+  const savedUser = localStorage.getItem("user");
+  return savedUser ? JSON.parse(savedUser) : null;
+});
 
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null //to get name,email..all credentials its important t oadd this
-  );
+  const [accessToken, setAccessToken] = useState(() => {
+  return localStorage.getItem("access_token") || null;
+  });
+  // Fetch user data from backend when token exists
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (accessToken && !user) {
+        try {
+          const response = await axiosInstance.get("me/");
+          setUser(response.data);
+          localStorage.setItem("user", JSON.stringify(response.data));
+        } catch (error) {
+          console.error("Failed to fetch user data:", error);
+          // Token might be expired, log out
+          logout();
+        }
+      }
+    };
 
-  const login = (token,userData) => {
+    fetchUserData();
+  }, [accessToken]);
+
+
+  const login = async(token) => {
     localStorage.setItem("access_token", token);
-    localStorage.setItem("user", JSON.stringify(userData)); //store user data
+    //localStorage.setItem("user", JSON.stringify(userData)); //store user data
     setAccessToken(token);
-    setUser(userData);
+    // Now fetch user data from backend
+    try {
+      const response = await axiosInstance.get("me/");
+      setUser(response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
+    } catch (error) {
+      console.error("Failed to fetch user data after login:", error);
+    }
   };
 
   const logout = () => {

@@ -41,10 +41,10 @@ function Header() {
   if (user.username) {
     return user.username[0].toUpperCase();
   }
-
+  
   return "";
 };
-
+    console.log("AUTH USER:", user);
   return (
     <header className="bg-gray-50 border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-6">
@@ -151,15 +151,15 @@ function Header() {
                   font-semibold
                   cursor-pointer
                 "
-                title={user?.email}
               >
-                {getInitials(user)}
+                {user?.initials}
               </div>
             )}
           </nav>
 
         </div>
       </div>
+     
     </header>
   );
 }
