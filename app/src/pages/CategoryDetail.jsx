@@ -4,6 +4,7 @@ import axios from "axios";
 import CategoryHero from "../components/category components/hero";
 import SubCategorySection from "../components/category components/subcategory";
 import FeaturedProductsCarousel from "../components/category components/Carousell";
+import api from '../apis/axiosInstance'; //importing the global axios instance
 
 const CategoryDetail = () => {
   const { slug } = useParams(); // from URL
@@ -13,7 +14,7 @@ const CategoryDetail = () => {
   useEffect(() => {
     setLoading(true);
 
-    axios
+    api
       .get(`http://127.0.0.1:8000/products/categories/${slug}/`)
       .then((res) => {
         setCategory(res.data);
