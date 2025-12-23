@@ -14,17 +14,21 @@ export const AuthProvider = ({ children }) => {
   );
 
   const [user, setUser] = useState(
-    localStorage.getItem("user") || null //to get name,email..all credentials its important t oadd this
+    JSON.parse(localStorage.getItem("user")) || null //to get name,email..all credentials its important t oadd this
   );
 
-  const login = (token) => {
+  const login = (token,userData) => {
     localStorage.setItem("access_token", token);
+    localStorage.setItem("user", JSON.stringify(userData)); //store user data
     setAccessToken(token);
+    setUser(userData);
   };
 
   const logout = () => {
     localStorage.removeItem("access_token");
+    localStorage.removeItem("user");
     setAccessToken(null);
+    setUser(null);
   };
 
   const isAuthenticated = !!accessToken; //this is the magic bolean that tells us if user is logged in or not
@@ -34,8 +38,8 @@ export const AuthProvider = ({ children }) => {
   //eg {isAuthenticated ? <button>logout</button> : <RedirectToLogin />}
 
   return (
-    //provides the data 
-    <AuthContext.Provider value={{ accessToken, login, logout, isAuthenticated }}>
+    //provides the data
+    <AuthContext.Provider value={{ accessToken, user, login, logout, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   );
