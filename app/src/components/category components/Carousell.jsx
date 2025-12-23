@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const BASE_URL = "http://127.0.0.1:8000"; // your backend base URL
+const BASE_URL = "http://127.0.0.1:8000";
 
 const FeaturedProductsCarousel = ({ products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,50 +18,66 @@ const FeaturedProductsCarousel = ({ products }) => {
   const getProduct = (index) => products[index % products.length];
 
   return (
-    <section className="bg-gray-100 py-2">
+    <section className="bg-gray-100 py-8">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex justify-center">
-        <h2 className="text-2xl  md:text-3xl font-bold text-gray-900 mb-4">
-          <span className="text-black">Featured</span>{" "}
-          <span className="text-[#006400]">Products</span>
-        </h2></div>
+        <div className="text-center mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <span className="text-black">Featured</span>{" "}
+            <span className="text-[#006400]">Products</span>
+          </h2>
+        </div>
 
-        <div className="flex gap-4 h-100 overflow-hidden w-10/12 mt-6 mx-auto">
+        <div className="flex gap-6 flex-wrap md:flex-nowrap">
           {/* Left: Big product */}
-          <div className=" w-1/3 h-64 md:h-80 relative rounded-lg shadow-lg overflow-hidden">
+          <div className="flex-1 md:flex-[2] h-80 relative rounded-xl shadow-lg overflow-hidden">
             <img
-              src={getProduct(currentIndex).image
-                ? getProduct(currentIndex).image.startsWith("http")
-                  ? getProduct(currentIndex).image
-                  : `${BASE_URL}${getProduct(currentIndex).image}`
-                : "/placeholder.png"}
+              src={
+                getProduct(currentIndex).image
+                  ? getProduct(currentIndex).image.startsWith("http")
+                    ? getProduct(currentIndex).image
+                    : `${BASE_URL}${getProduct(currentIndex).image}`
+                  : "/placeholder.png"
+              }
               alt={getProduct(currentIndex).name}
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-0 left-0 bg-black/50 text-white p-3 w-full">
-              <h3 className="font-semibold text-sm md:text-base">{getProduct(currentIndex).name}</h3>
-              <p className="text-xs md:text-sm line-clamp-2">{getProduct(currentIndex).description}</p>
+            <div className="absolute bottom-0 left-0 bg-black/50 text-white p-4 w-full">
+              <h3 className="font-semibold text-base md:text-lg">
+                {getProduct(currentIndex).name}
+              </h3>
+              <p className="text-sm md:text-base line-clamp-2">
+                {getProduct(currentIndex).description}
+              </p>
             </div>
           </div>
 
-          {/* Right: Two smaller products */}
-          <div className="flex flex-col gap-4 pl-6 w-1/2">
+          {/* Right: Two smaller products stacked */}
+          <div className="flex flex-col gap-6 flex-1 md:flex-[1]">
             {[1, 2].map((offset) => {
               const product = getProduct(currentIndex + offset);
               return (
-                <div key={offset} className="flex-1 relative border-gray-800 rounded-lg shadow overflow-hidden h-28 md:h-36">
+                <div
+                  key={offset}
+                  className="relative rounded-xl shadow-md overflow-hidden h-36 md:h-40"
+                >
                   <img
-                    src={product.image
-                      ? product.image.startsWith("http")
-                        ? product.image
-                        : `${BASE_URL}${product.image}`
-                      : "/placeholder.png"}
+                    src={
+                      product.image
+                        ? product.image.startsWith("http")
+                          ? product.image
+                          : `${BASE_URL}${product.image}`
+                        : "/placeholder.png"
+                    }
                     alt={product.name}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute bottom-0 left-0 bg-black/40 text-white p-2 w-full">
-                    <h3 className="font-medium text-xs md:text-sm">{product.name}</h3>
-                    <p className="text-[10px] md:text-xs line-clamp-1">{product.description}</p>
+                    <h3 className="font-medium text-sm md:text-base">
+                      {product.name}
+                    </h3>
+                    <p className="text-xs md:text-sm line-clamp-1">
+                      {product.description}
+                    </p>
                   </div>
                 </div>
               );
