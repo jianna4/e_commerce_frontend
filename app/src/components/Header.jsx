@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import img from "../assets/logo.png";
 import { useAuth } from "../apis/AuthContext";
+import api from '../apis/axiosInstance'; //for global axios instance with auth headers
 
 function Header() {
   const [categories, setCategories] = useState([]);
@@ -12,8 +13,8 @@ function Header() {
   const { user, isAuthenticated } = useAuth();
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/products/categories/")
+    api
+      .get("/products/categories/")
       .then((res) => setCategories(res.data))
       .catch((err) => console.error("Failed to load categories:", err));
   }, []);
