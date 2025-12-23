@@ -15,7 +15,7 @@ const CategoryDetail = () => {
     setLoading(true);
 
     api
-      .get(`http://127.0.0.1:8000/products/categories/${slug}/`)
+      .get(`/products/categories/${slug}/`)
       .then((res) => {
         setCategory(res.data);
         setLoading(false);
