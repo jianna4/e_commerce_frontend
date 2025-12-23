@@ -32,8 +32,9 @@ const CategoryDetail = () => {
   if (!category) {
     return <p className="text-center mt-20">Category not found.</p>;
   }
-  const allProducts = category.subcategories.flatMap(sub => sub.products);
 
+  const allProducts = category.subcategories.flatMap(sub => sub.products);
+  //this is used to loop through all products in the category,we use flatmap to flatten the array of arrays,sub is just a variable name for each subcategory
 
   return (
     <div>
