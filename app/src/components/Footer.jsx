@@ -9,7 +9,6 @@ const footerNavList = [
       { label: "Overview", href: "#" },
       { label: "Features", href: "#" },
       { label: "Solutions", href: "#" },
-      { label: "Tutorials", href: "#" },
       { label: "Pricing", href: "#" },
       { label: "Releases", href: "#" },
     ],
@@ -18,8 +17,7 @@ const footerNavList = [
     label: "Company",
     items: [
       { label: "About us", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Press", href: "#" },
+     
       { label: "News", href: "#" },
       { label: "Media kit", href: "#" },
       { label: "Contact", href: "#" },
@@ -32,29 +30,16 @@ const footerNavList = [
       { label: "Newsletter", href: "#" },
       { label: "Events", href: "#" },
       { label: "Help centre", href: "#" },
-      { label: "Tutorials", href: "#" },
-      { label: "Support", href: "#" },
+     
     ],
   },
-  {
-    label: "Use cases",
-    items: [
-      { label: "Startups", href: "#" },
-      { label: "Enterprise", href: "#" },
-      { label: "Government", href: "#" },
-      { label: "SaaS centre", href: "#" },
-      { label: "Marketplaces", href: "#" },
-      { label: "Ecommerce", href: "#" },
-    ],
-  },
+
   {
     label: "Social",
     items: [
       { label: "Twitter", href: "#" },
       { label: "LinkedIn", href: "#" },
       { label: "Facebook", href: "#" },
-      { label: "GitHub", href: "#" },
-      { label: "AngelList", href: "#" },
       { label: "Dribbble", href: "#" },
     ],
   },
@@ -63,8 +48,7 @@ const footerNavList = [
     items: [
       { label: "Terms", href: "#" },
       { label: "Privacy", href: "#" },
-      { label: "Cookies", href: "#" },
-      { label: "Licenses", href: "#" },
+    
       { label: "Settings", href: "#" },
       { label: "Contact", href: "#" },
     ],
