@@ -41,7 +41,7 @@ const FeaturedProductsCarousel = ({ products }) => {
               alt={getProduct(currentIndex).name}
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-0 left-0 bg-black/50 text-white p-4 w-full">
+            <div className="absolute bottom-0 left-0 bg-white/50 text-black p-4 w-full">
               <h3 className="font-semibold text-base md:text-lg">
                 {getProduct(currentIndex).name}
               </h3>
@@ -71,7 +71,7 @@ const FeaturedProductsCarousel = ({ products }) => {
                     alt={product.name}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute bottom-0 left-0 bg-black/40 text-white p-2 w-full">
+                  <div className="absolute bottom-0 left-0 bg-white/40 text-black p-2 w-full">
                     <h3 className="font-medium text-sm md:text-base">
                       {product.name}
                     </h3>
