@@ -6,7 +6,7 @@ const BASE_URL = "http://127.0.0.1:8000";
 
 const ProductCard = ({ product }) => {
   const [open, setOpen] = useState(false);
-  const [status, setStatus] = useState(null); // pending | completed
+  
 
   const imageUrl = product.image
     ? product.image.startsWith("http")

@@ -78,6 +78,8 @@ const FeaturedProductsCarousel = ({ products }) => {
                     <p className="text-xs md:text-sm line-clamp-1">
                       {product.description}
                     </p>
+                    
+                    
                   </div>
                 </div>
               );
