@@ -4,9 +4,10 @@ const ProductModal = ({ product, imageUrl, onClose }) => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
 
-  const availableColors = selectedSize
-    ? selectedSize.size_colors
-    : [];
+  // ✅ FIX: backend sends `colors`, not `size_colors`
+  const availableColors = selectedSize?.colors || [];
+
+  if (!product) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -20,12 +21,14 @@ const ProductModal = ({ product, imageUrl, onClose }) => {
           ✕
         </button>
 
+        {/* Image */}
         <img
           src={imageUrl}
           alt={product.name}
           className="h-48 w-full object-cover rounded"
         />
 
+        {/* Info */}
         <h2 className="text-xl font-bold">{product.name}</h2>
         <p className="text-gray-600 text-sm">{product.description}</p>
 
@@ -33,61 +36,85 @@ const ProductModal = ({ product, imageUrl, onClose }) => {
           KES {product.price}
         </p>
 
-        {/* SIZES */}
+        {/* ---------- SIZES ---------- */}
         <div>
           <h4 className="font-semibold mb-2">Select Size</h4>
           <div className="flex flex-wrap gap-2">
-            {product.sizes.map((size) => (
-              <button
-                key={size.id}
-                onClick={() => {
-                  setSelectedSize(size);
-                  setSelectedColor(null);
-                }}
-                className={`px-3 py-1 border rounded ${
-                  selectedSize?.id === size.id
-                    ? "bg-[#006400] text-white"
-                    : "border-gray-300"
-                }`}
-              >
-                {size.waist_shoe_size}
-              </button>
-            ))}
+            {product.sizes?.length > 0 ? (
+              product.sizes.map((size) => (
+                <button
+                  key={size.id}
+                  onClick={() => {
+                    setSelectedSize(size);
+                    setSelectedColor(null);
+                  }}
+                  className={`px-3 py-1 rounded border
+                    ${
+                      selectedSize?.id === size.id
+                        ? "bg-[#006400] text-white"
+                        : "bg-white"
+                    }
+                  `}
+                >
+                  {size.waist_shoe_size}
+                </button>
+              ))
+            ) : (
+              <p className="text-sm text-gray-500">No sizes available</p>
+            )}
           </div>
         </div>
 
-        {/* COLORS */}
+        {/* ---------- COLORS ---------- */}
         {selectedSize && (
           <div>
             <h4 className="font-semibold mb-2">Select Color</h4>
-            <div className="flex gap-3 flex-wrap">
-              {availableColors.map((color) => (
-                <button
-                  key={color.id}
-                  onClick={() => setSelectedColor(color)}
-                  disabled={color.quantity === 0}
-                  className={`w-8 h-8 rounded-full border-2 flex items-center justify-center
-                    ${selectedColor?.id === color.id ? "border-black" : "border-gray-300"}
-                    ${color.quantity === 0 ? "opacity-40 cursor-not-allowed" : ""}
-                  `}
-                  title={`${color.color_name} (${color.quantity} left)`}
-                  style={{
-                    backgroundColor: color.hex_code || "#ccc",
-                  }}
-                />
-              ))}
-            </div>
+
+            {availableColors.length > 0 ? (
+              <div className="flex gap-3 flex-wrap">
+                {availableColors.map((color) => (
+                  <button
+                    key={color.id}
+                    onClick={() => setSelectedColor(color)}
+                    disabled={color.quantity === 0}
+                    className={`w-8 h-8 rounded-full border-2
+                      ${
+                        selectedColor?.id === color.id
+                          ? "border-black"
+                          : "border-gray-300"
+                      }
+                      ${
+                        color.quantity === 0
+                          ? "opacity-40 cursor-not-allowed"
+                          : ""
+                      }
+                    `}
+                    title={`${color.color_name} (${color.quantity} left)`}
+                    style={{
+                      backgroundColor: color.hex_code || "#ccc",
+                    }}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-gray-500">
+                No colors for this size
+              </p>
+            )}
           </div>
         )}
 
-        {/* QUANTITY */}
+        {/* ---------- QUANTITY ---------- */}
         {selectedColor && (
           <p className="text-sm text-gray-600">
-            Available: <span className="font-semibold">{selectedColor.quantity}</span>
+            Available:{" "}
+            <span className="font-semibold">
+              {selectedColor.quantity}
+            </span>
           </p>
         )}
 
-        {/* ACTION */}
+        {/* ---------- ACTION ---------- */}
         <button
           disabled={!selectedSize || !selectedColor}
           className="w-full mt-4 bg-[#006400] text-white py-2 rounded disabled:opacity-50"
