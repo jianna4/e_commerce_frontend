@@ -1,28 +1,51 @@
 import { useEffect, useState } from "react";
-import ProductCard from "./ProductCard";
 import api from "../../apis/axiosInstance";
+import ProductCard from "../products/ProductCard";
 
 const OffersSection = () => {
-  const [products, setProducts] = useState([]);
+  const [campaigns, setCampaigns] = useState([]);
 
   useEffect(() => {
-    api.get("/products/products/")  // your endpoint
-      .then(res => setProducts(res.data))
+    api.get("/products/offersby_campaign/")
+      .then(res => {
+        // keep only active campaigns
+        const active = res.data.filter(
+          item => item.campaign.is_active
+        );
+        setCampaigns(active);
+      })
       .catch(err => console.error(err));
   }, []);
-  const OfferProducts= products.filter(
-    product=>product.active_offer
-  );
-  //now we group products according to campaign titles
-  
+
+  if (!campaigns.length) return null;
+
   return (
-    <section className="my-8">
-      <h2 className="text-2xl font-bold mb-4">Hot Offers</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
+    <section className="space-y-12">
+      {campaigns.map(campaignBlock => (
+        <div key={campaignBlock.campaign.id}>
+          {/* Campaign title */}
+          <h2 className="text-2xl font-heading font-bold mb-4">
+            {campaignBlock.campaign.title}
+          </h2>
+
+          {/* Products */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {campaignBlock.offers.map(offer => (
+              <ProductCard
+                key={offer.id}
+                product={{
+                  ...offer.product,
+                  active_offer: {
+                    old_price: offer.old_price,
+                    new_price: offer.new_price,
+                    percentage_off: offer.percentage_off
+                  }
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      ))}
     </section>
   );
 };
