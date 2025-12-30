@@ -53,7 +53,7 @@ function Header() {
 
           {/* LEFT: Logo */}
           <div className="flex items-center gap-3">
-            <img src={img} alt="Logo" className="h-9 w-9" />
+            <img src={img} alt="Logo" className="h-20 w-20" />
             <span className="text-xl font-bold text-orange-500">
               BaskitKE
             </span>

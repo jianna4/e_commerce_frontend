@@ -57,9 +57,9 @@ const footerNavList = [
 
 const Footer = () => {
   return (
-    <footer className="text-white">
+    <footer className="text-white bg-gray-100 mt-8">
   {/* Top green section */}
-  <div className="bg-[#006400] py-12 md:py-16 text-white">
+  <div className=" py-12 md:py-16 text-gray-700">
     <div className="mx-auto max-w-7xl px-4 md:px-8">
       <nav>
         <ul className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
@@ -71,7 +71,7 @@ const Footer = () => {
                   <li key={item.label}>
                     <a
                       href={item.href}
-                      className="text-white hover:text-gray-300 transition"
+                      className="text-gray-600 hover:text-black transition"
                     >
                       {item.label}
                     </a>
@@ -86,10 +86,10 @@ const Footer = () => {
   </div>
 
   {/* Bottom orange section */}
-  <div className="bg-[#FFA500] w-full py-6 flex flex-col md:flex-row items-center justify-between px-4 md:px-8">
+  <div className=" w-full py-6 flex flex-col md:flex-row items-center justify-between px-4 md:px-8">
     <div>
-    <img src={image} alt="Logo" className="h-10 w-auto " />
-    <span className="text-black font-serif text-lg font-bold">BaskitKE</span>
+    <img src={image} alt="Logo" className="h-20 w-auto " />
+    <span className="text-gray-700 font-serif text-lg font-bold">House of RoseVick Designs</span>
     </div>
     <p className="text-gray-900 text-md mt-4 md:mt-0">
       © 2077 Your Company. All rights reserved.
