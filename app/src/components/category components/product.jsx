@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
   return (
     <>
       {/* CARD */}
-      <div className=" relative border border-gray-200 shadow-xl rounded-lg overflow-hidden bg-gray hover:shadow-gray-400 hover:border-2 hover:border-gray-300 transition">
+      <div className=" relative group border border-gray-200 shadow-xl rounded-lg overflow-hidden bg-gray hover:shadow-gray-400 hover:border-2 hover:border-gray-300 transition">
         <Link to={`/product/${product.id}`}>
           <img
             src={imageUrl}
@@ -33,14 +33,12 @@ const ProductCard = ({ product }) => {
          </span>
       )}
 
-        <div className="p-4 space-y-3">
+        <div className="p-1 space-y-2">
           <h3 className="font-semibold">{product.name}</h3>
 
-          <p className="text-sm text-gray-600 line-clamp-2">
-            {product.description}
-          </p>
-          
-          {offer?(
+         
+
+          {offer ? (
             <div className="space-y-1">
               <p className="text-sm text-gray-500 line-through">
                 KES{offer.old_price}
@@ -50,17 +48,19 @@ const ProductCard = ({ product }) => {
               </p>
             </div>
           ):(
-            <p className="font-bold text-orange-600">
+            <p className=" text-gray-900">
             KES {product.price}
             </p>
           )}
-          
+           <p className="text-sm text-gray-600 line-clamp-2">
+            {product.description}
+          </p>
 
           <button
             onClick={() => setOpen(true)}
-            className="w-full bg-[#5AB7E6] text-white py-2 rounded hover:bg-green-700"
+            className="w-full bg-[#5AB7E6] text-white py-2 rounded opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 "
           >
-            Add to Cart
+            Quick View
           </button>
         </div>
       </div>

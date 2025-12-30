@@ -3,13 +3,13 @@ import ProductCard from "./product";
 const SubCategorySection = ({ subcategory }) => {
   return (
     <section>
-      <h2 className="text-2xl font-semibold mb-6">
+      <h2 className="text-2xl  mb-2 font-heading tracking-tight leading-snug">
   {(() => {
     const words = subcategory.name.split(" ");
     return (
       <>
         <span className="text-black">{words[0]}</span>{" "}
-        <span className="text-[#006400]">{words.slice(1).join(" ")}</span>
+        <span className="text-[#5AB7E6]">{words.slice(1).join(" ")}</span>
       </>
     );
   })()}

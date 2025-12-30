@@ -54,8 +54,8 @@ function Header() {
           {/* LEFT: Logo */}
           <div className="flex items-center gap-3">
             <img src={img} alt="Logo" className="h-20 w-20" />
-            <span className="text-xl font-bold text-orange-500">
-              BaskitKE
+            <span className="text-xl font-bold text-[#5AB7E6]">
+             House of RoseVick Designs
             </span>
           </div>
 
@@ -85,7 +85,7 @@ function Header() {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setOpen(!open)}
-                className="hover:text-orange-500 transition"
+                className="hover:text-[#5AB7E6] transition"
               >
                 Categories
               </button>
@@ -119,24 +119,24 @@ function Header() {
             </div>
 
             {/* Other links (RESTORED) */}
-            <Link to="/" className="hover:text-orange-500 transition">
+            <Link to="/" className="hover:text-[#5AB7E6] transition">
               Home
             </Link>
 
-            <Link to="/about" className="hover:text-orange-500 transition">
+            <Link to="/about" className="hover:text-[#5AB7E6] transition">
               About
             </Link>
 
-            <Link to="/contact" className="hover:text-orange-500 transition">
+            <Link to="/contact" className="hover:text-[#5AB7E6] transition">
               Contact
             </Link>
 
             {!isAuthenticated ? (
               <>
-                <Link to="/login" className="hover:text-orange-500 transition">
+                <Link to="/login" className="hover:text-[#5AB7E6] transition">
                   Login
                 </Link>
-                <Link to="/signup" className="hover:text-orange-500 transition">
+                <Link to="/signup" className="hover:text-[#5AB7E6] transition">
                   Signup
                 </Link>
               </>
@@ -146,7 +146,7 @@ function Header() {
                 className="
                   h-10 w-10
                   rounded-full
-                  bg-orange-500
+                  bg-[#5AB7E6]
                   text-white
                   flex items-center justify-center
                   font-semibold
