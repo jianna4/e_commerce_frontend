@@ -1,129 +1,151 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
+
+const backdrop = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+const modal = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      ease: "easeOut",
+      staggerChildren: 0.12,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.35, ease: "easeOut" },
+  },
+};
 
 const ProductModal = ({ product, imageUrl, onClose }) => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
 
-  // ✅ FIX: backend sends `colors`, not `size_colors`
   const availableColors = selectedSize?.colors || [];
 
   if (!product) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl w-full max-w-md p-6 space-y-4 relative">
-
+    <motion.div
+      className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
+      variants={backdrop}
+      initial="hidden"
+      animate="visible"
+      onClick={onClose}
+    >
+      <motion.div
+        variants={modal}
+        initial="hidden"
+        animate="visible"
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-md rounded-2xl bg-gradient-to-b from-[#111] to-[#1c1c1c] p-6 text-white"
+      >
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-black"
+          className="absolute top-4 right-4 text-white/60 hover:text-white"
         >
           ✕
         </button>
 
-        {/* Image */}
-        <img
-          src={imageUrl}
-          alt={product.name}
-          className="h-48 w-full object-cover rounded"
-        />
+        {/* IMAGE */}
+        <motion.div
+          initial={{ opacity: 0, y: 40, rotate: -18 }}
+          animate={{ opacity: 1, y: 0, rotate: -12 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex justify-center mb-6"
+        >
+          <img
+            src={imageUrl}
+            alt={product.name}
+            className="h-52 w-40 object-cover rounded-xl shadow-2xl"
+          />
+        </motion.div>
 
-        {/* Info */}
-        <h2 className="text-xl font-bold">{product.name}</h2>
-        <p className="text-gray-600 text-sm">{product.description}</p>
+        {/* INFO */}
+        <motion.h2 variants={item} className="text-2xl font-bold">
+          {product.name}
+        </motion.h2>
 
-        <p className="font-bold text-lg text-orange-600">
+        <motion.p variants={item} className="text-sm text-white/70">
+          {product.description}
+        </motion.p>
+
+        <motion.p
+          variants={item}
+          className="text-lg font-bold text-orange-400"
+        >
           KES {product.price}
-        </p>
+        </motion.p>
 
-        {/* ---------- SIZES ---------- */}
-        <div>
-          <h4 className="font-semibold mb-2">Select Size</h4>
+        {/* SIZES */}
+        <motion.div variants={item}>
+          <h4 className="font-semibold mt-4 mb-2">Size</h4>
           <div className="flex flex-wrap gap-2">
-            {product.sizes?.length > 0 ? (
-              product.sizes.map((size) => (
-                <button
-                  key={size.id}
-                  onClick={() => {
-                    setSelectedSize(size);
-                    setSelectedColor(null);
-                  }}
-                  className={`px-3 py-1 rounded border
-                    ${
-                      selectedSize?.id === size.id
-                        ? "bg-[#006400] text-white"
-                        : "bg-white"
-                    }
-                  `}
-                >
-                  {size.waist_shoe_size}
-                </button>
-              ))
-            ) : (
-              <p className="text-sm text-gray-500">No sizes available</p>
-            )}
+            {product.sizes?.map((size) => (
+              <button
+                key={size.id}
+                onClick={() => {
+                  setSelectedSize(size);
+                  setSelectedColor(null);
+                }}
+                className={`px-3 py-1 rounded-full border transition
+                  ${
+                    selectedSize?.id === size.id
+                      ? "bg-white text-black"
+                      : "border-white/30 text-white"
+                  }`}
+              >
+                {size.waist_shoe_size}
+              </button>
+            ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* ---------- COLORS ---------- */}
+        {/* COLORS */}
         {selectedSize && (
-          <div>
-            <h4 className="font-semibold mb-2">Select Color</h4>
-
-            {availableColors.length > 0 ? (
-              <div className="flex gap-3 flex-wrap">
-                {availableColors.map((color) => (
-                  <button
-                    key={color.id}
-                    onClick={() => setSelectedColor(color)}
-                    disabled={color.quantity === 0}
-                    className={`w-8 h-8 rounded-full border-2
-                      ${
-                        selectedColor?.id === color.id
-                          ? "border-black"
-                          : "border-gray-300"
-                      }
-                      ${
-                        color.quantity === 0
-                          ? "opacity-40 cursor-not-allowed"
-                          : ""
-                      }
-                    `}
-                    title={`${color.color_name} (${color.quantity} left)`}
-                    style={{
-                      backgroundColor: color.hex_code || "#ccc",
-                    }}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p className="text-sm text-gray-500">
-                No colors for this size
-              </p>
-            )}
-          </div>
+          <motion.div variants={item}>
+            <h4 className="font-semibold mt-4 mb-2">Color</h4>
+            <div className="flex gap-3">
+              {availableColors.map((color) => (
+                <button
+                  key={color.id}
+                  onClick={() => setSelectedColor(color)}
+                  className={`w-8 h-8 rounded-full border-2 transition
+                    ${
+                      selectedColor?.id === color.id
+                        ? "border-white scale-110"
+                        : "border-white/30"
+                    }`}
+                  style={{ backgroundColor: color.hex_code || "#999" }}
+                />
+              ))}
+            </div>
+          </motion.div>
         )}
 
-        {/* ---------- QUANTITY ---------- */}
-        {selectedColor && (
-          <p className="text-sm text-gray-600">
-            Available:{" "}
-            <span className="font-semibold">
-              {selectedColor.quantity}
-            </span>
-          </p>
-        )}
-
-        {/* ---------- ACTION ---------- */}
-        <button
+        {/* BUTTON */}
+        <motion.button
+          variants={item}
           disabled={!selectedSize || !selectedColor}
-          className="w-full mt-4 bg-[#006400] text-white py-2 rounded disabled:opacity-50"
+          className="w-full mt-6 rounded-xl bg-white text-black py-2 font-semibold disabled:opacity-40"
         >
           Add to Cart
-        </button>
-
-      </div>
-    </div>
+        </motion.button>
+      </motion.div>
+    </motion.div>
   );
 };
 
