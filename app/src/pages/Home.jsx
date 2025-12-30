@@ -1,9 +1,16 @@
 
 import React from 'react'
-
+import OffersSection from '../components/Offers'
 const Home = () => {
   return (
-   <div className="home-container"></div>
+    <>
+      {/* Hero */}
+      {/* Categories */}
+
+      <OffersSection />
+
+      {/* Other sections */}
+    </>
   )
 }
 
