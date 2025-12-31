@@ -31,6 +31,29 @@ const Categoryin = () => {
       );
     }
   };
+  return(
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name</label>
+          <input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+        </div>
+        <div>
+          <label>Slug</label>
+          <input type="text" value={form.Slug} onChange={(e) => setForm({ ...form, Slug: e.target.value })} />
+        </div>
+        <div>
+          <label>Description</label>
+          <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} />
+        </div>
+        <div>
+          <label>Image</label>
+          <input type="image" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
+        </div>
+        <button type="submit">Create Category</button>
+      </form>
+    </div>
+  )
 };
 
 export default Categoryin;
