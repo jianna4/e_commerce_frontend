@@ -39,7 +39,7 @@ const ProductModal = ({ product, imageUrl, onClose }) => {
 
   return (
     <motion.div
-      className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
+      className="fixed inset-0 bg-gray/70 backdrop-blur-sm flex items-center justify-center z-50"
       variants={backdrop}
       initial="hidden"
       animate="visible"
@@ -50,7 +50,7 @@ const ProductModal = ({ product, imageUrl, onClose }) => {
         initial="hidden"
         animate="visible"
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-md rounded-2xl bg-gradient-to-b from-[#111] to-[#1c1c1c] p-6 text-white"
+        className="relative w-full max-w-md rounded-2xl  bg-gray-600 p-6 text-white"
       >
         {/* Close */}
         <button
@@ -85,7 +85,7 @@ const ProductModal = ({ product, imageUrl, onClose }) => {
 
         <motion.p
           variants={item}
-          className="text-lg font-bold text-orange-400"
+          className="text-lg font-bold text-[#5AB7E6]"
         >
           KES {product.price}
         </motion.p>
@@ -129,7 +129,7 @@ const ProductModal = ({ product, imageUrl, onClose }) => {
                         ? "border-white scale-110"
                         : "border-white/30"
                     }`}
-                  style={{ backgroundColor: color.hex_code || "#999" }}
+                  style={{ backgroundColor: color.hex_code || "#000" }}
                 />
               ))}
             </div>
