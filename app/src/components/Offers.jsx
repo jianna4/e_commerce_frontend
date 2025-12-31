@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import api from "../../apis/axiosInstance";
-import ProductCard from "../products/ProductCard";
+import api from '../apis/axiosInstance'; //for global axios instance with auth headers
+import ProductCard from "./category components/product";
 
 const OffersSection = () => {
   const [campaigns, setCampaigns] = useState([]);
