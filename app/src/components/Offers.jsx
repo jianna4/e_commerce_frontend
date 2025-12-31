@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from '../apis/axiosInstance'; //for global axios instance with auth headers
 import ProductCard from "./category components/product";
-
+import CountdownTimer from "./Countdowntimer";
 const OffersSection = () => {
   const [campaigns, setCampaigns] = useState([]);
 
@@ -23,11 +23,14 @@ const OffersSection = () => {
     <section className="space-y-12">
       {campaigns.map(campaignBlock => (
         <div key={campaignBlock.campaign.id}>
+          <div className="flex items-center "> 
           {/* Campaign title */}
           <h2 className="text-2xl font-heading font-bold mb-4">
             {campaignBlock.campaign.title}
+          
+          <CountdownTimer endDate={campaignBlock.campaign.end_date} />
           </h2>
-
+          </div>
           {/* Products */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {campaignBlock.offers.map(offer => (
