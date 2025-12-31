@@ -6,7 +6,7 @@ const Subcategoryin = () => {
   const[categories,setCategories]= useState([])
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const [form,setForm]=useState({name:"",categoryname:""})
+  const [form,setForm]=useState({name:"",categoryname:"",categoryid:""})
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -31,10 +31,17 @@ const Subcategoryin = () => {
     e.preventDefault();
     try { await api.post("/products/subcategoryin/",{
       name:form.name,
-      category: { name: form.categoryname }
+      category:{ id: form.categoryid }//aparently dont send the category name bu the id
     });
+    setForm({ name: "", categoryname: "", categoryid: "" }); // reset form
+    setError("");
+    alert("Subcategory created successfully!");
   } catch (error) {
-    setError("Failed to create subcategory");
+    setError(
+      error.response?.data?.name?.[0] ||
+      error.response?.data?.category?.[0] ||
+        "Subcategory creation failed."
+    );
   }}
   return (
     <>
@@ -63,7 +70,7 @@ const Subcategoryin = () => {
                         key={id}
                         
                         onClick={() =>{
-                         setForm({...form, categoryname: name});
+                         setForm({...form, categoryname: name , categoryid: id });
                            setOpen(false)}}
                         className=" block px-4 py-2 text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition">
                         {name}
