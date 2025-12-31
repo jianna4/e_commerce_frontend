@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../apis/AuthContext";
 import img1 from "../assets/logo.png";
-import api from '../apis/axiosInstance'; //for global axios instance with auth headers
+import api from '../apis/axiosInstance'; //for global axios instance with auth headers.
 
 const Signup = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
