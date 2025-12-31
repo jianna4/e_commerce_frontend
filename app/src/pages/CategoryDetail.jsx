@@ -39,7 +39,7 @@ const CategoryDetail = () => {
 
   return (
     <div>
-      <CategoryHero category={category} />
+      <CategoryHero category={category}  products={allProducts}  />
 
       <FeaturedProductsCarousel products={allProducts} />
 

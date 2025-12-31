@@ -11,6 +11,7 @@ import Login  from './pages/Login';
 import Signup from './pages/Signup';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Admin from './pages/Admin';
 function App() {
  
 //#5AB7E6
@@ -29,6 +30,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/Admin" element={<Admin/>} />
             <Route path="/category/:slug" element={<CategoryDetail />} />
 
             {/* Add other routes here */}

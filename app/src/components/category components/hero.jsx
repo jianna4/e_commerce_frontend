@@ -1,7 +1,7 @@
 
 import api from '../../apis/axiosInstance';
-
-const CategoryHero = ({ category }) => {
+import AnimatedProductCloud from './productanimation';
+const CategoryHero = ({ category,products }) => {
   // Handle image URL
   const imageUrl = category.image
     ? category.image.startsWith("http")

@@ -131,6 +131,11 @@ function Header() {
               Contact
             </Link>
 
+            <Link to="/Admin" className="hover:text-[#5AB7E6] transition">
+              Admin
+            </Link>
+            
+
             {!isAuthenticated ? (
               <>
                 <Link to="/login" className="hover:text-[#5AB7E6] transition">

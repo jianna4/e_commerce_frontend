@@ -27,7 +27,7 @@ const SubCategorySection = ({ subcategory }) => {
       >
         {subcategory.products.length === 0 && (
           <p className="text-gray-500">
-            No products in this subcategory.
+            Products commingsoon...
           </p>
         )}
 
