@@ -16,6 +16,7 @@ const Categoryin = () => {
       formData.append("name", form.name);
       formData.append("slug", form.slug);
       formData.append("description", form.description);
+      formData.append("is_active", "true"); 
       if (form.image) formData.append("image", form.image);
     try {
       
