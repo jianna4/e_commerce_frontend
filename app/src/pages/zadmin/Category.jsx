@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import AdminTable from "./Admintable";
-import AdminLayout from "./Adminlayout";
-import AdminModal from "./Adminmodal";
+
+import AdminModal from "./Modal";
+import Admin2 from "../Admin2";
 import api from "../../apis/axiosInstance";
+
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);

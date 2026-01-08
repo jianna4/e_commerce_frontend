@@ -17,7 +17,7 @@ import Admin2 from './pages/Admin2';
 //admin pages
 import AdminSubcategories from './pages/zadmin/Subcategory';
 import AdminCategories from './pages/zadmin/Category';
-import AdminProducts from './pages/zadmin/Products';
+import AdminProducts from './pages/zadmin/Product';
 import Mainoffers from './pages/zadmin/Mainoffers';
 import Offers from './pages/zadmin/Offer';
 import Users from './pages/zadmin/Users';
@@ -31,9 +31,6 @@ function App() {
    
        <div className="flex flex-col min-h-screen">
         <Header />
-        
-
-        {/* Main content grows to push footer down */}
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -41,15 +38,21 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/Admin" element={<Admin/>} />
+            <Route path="/Admin" element={<Admin />} />
             <Route path="/category/:slug" element={<CategoryDetail />} />
-            <Route path="/admin2" element={<Admin2/>} />
+            <Route path="/admin2" element={<Admin2 />} />
+            {/* Admin routes */}
+            <Route path="/admin/subcategories" element={<AdminSubcategories />} />
+            <Route path="/admin/categories" element={<AdminCategories />} />
+            <Route path="/admin/products" element={<AdminProducts />} />
+            <Route path="/admin/mainoffers" element={<Mainoffers />} />
+            <Route path="/admin/offers" element={<Offers />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/orders" element={<Orders />} />
 
-            {/* Add other routes here */}
+           
           </Routes>
         </main>
-
-        {/* Footer stays at bottom */}
         <Footer />
       </div>
     
