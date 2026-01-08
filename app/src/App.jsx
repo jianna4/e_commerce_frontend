@@ -12,6 +12,7 @@ import Signup from './pages/Signup';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
+import Admin2 from './pages/Admin2';
 function App() {
  
 //#5AB7E6
@@ -32,6 +33,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/Admin" element={<Admin/>} />
             <Route path="/category/:slug" element={<CategoryDetail />} />
+            <Route path="/admin2" element={<Admin2/>} />
 
             {/* Add other routes here */}
           </Routes>
