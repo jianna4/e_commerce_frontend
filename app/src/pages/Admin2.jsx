@@ -1,8 +1,10 @@
-import Sidebar from "../components/zadmin/SIDEBAR.JSX"
+
+
+import Sidebarr from "./zadmin/Sidebar";
 const Admin2 = ({ title, action, children }) => {
   return (
     <div className="flex">
-      <Sidebar />
+      <Sidebarr />
       <div className="flex-1 min-h-screen bg-adminGray p-6">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-6">
