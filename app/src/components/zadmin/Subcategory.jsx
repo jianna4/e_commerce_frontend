@@ -1,44 +1,41 @@
-const AdminTable = ({ columns, data, onEdit, onDelete }) => {
-  return (
-    <table className="w-full text-sm">
-      <thead className="bg-gray-50 border-b">
-        <tr>
-          {columns.map(col => (
-            <th key={col.key} className="text-left px-4 py-3 font-medium">
-              {col.label}
-            </th>
-          ))}
-          <th className="px-4 py-3 text-right">Actions</th>
-        </tr>
-      </thead>
+const AdminSubcategories = () => {
+  const [items, setItems] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [editing, setEditing] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [form, setForm] = useState({ name: "", category: "" });
 
-      <tbody>
-        {data.map(item => (
-          <tr key={item.id} className="border-b hover:bg-gray-50">
-            {columns.map(col => (
-              <td key={col.key} className="px-4 py-3">
-                {col.render ? col.render(item) : item[col.key]}
-              </td>
-            ))}
-            <td className="px-4 py-3 text-right space-x-2">
-              <button
-                onClick={() => onEdit(item)}
-                className="text-primary hover:underline"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => onDelete(item.id)}
-                className="text-red-500 hover:underline"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+  useEffect(() => {
+    api.get("/products/subcategoryin/").then(r => setItems(r.data));
+    api.get("/products/categoryin/").then(r => setCategories(r.data));
+  }, []);
+
+  const submit = async e => {
+    e.preventDefault();
+    editing
+      ? await api.put(`/products/subcategoryin/${editing.id}/`, form)
+      : await api.post("/products/subcategoryin/", form);
+    setOpen(false);
+  };
+
+  return (
+    <AdminLayout title="Subcategories">
+      <AdminTable
+        data={items}
+        columns={[
+          { key: "name", label: "Name" },
+          { key: "category", label: "Category" },
+        ]}
+        onEdit={i => {
+          setEditing(i);
+          setForm(i);
+          setOpen(true);
+        }}
+        onDelete={id =>
+          api.delete(`/products/subcategoryin/${id}/`)
+        }
+      />
+    </AdminLayout>
   );
 };
-
-export default AdminTable;
+export default AdminSubcategories;

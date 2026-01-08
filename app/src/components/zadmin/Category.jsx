@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import AdminTable from "./Admintable";
+import AdminLayout from "./Adminlayout";
+import AdminModal from "./Adminmodal";
 import api from "../../apis/axiosInstance";
-import AdminLayout from "../layout/AdminLayout";
-import AdminTable from "../ui/AdminTable";
-import AdminModal from "../ui/AdminModal";
 
 const AdminCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -114,7 +114,7 @@ const AdminCategories = () => {
           <input
             className="w-full border p-2 rounded bg-gray-100"
             value={form.slug}
-            disabled={!!editing}   {/* 🔒 slug locked on update */}
+            disabled={!!editing}  
           />
 
           <textarea
