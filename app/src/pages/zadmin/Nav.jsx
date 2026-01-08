@@ -4,8 +4,8 @@ const Nav = () => {
   const linkClasses = ({ isActive }) =>
     `transition ${
       isActive
-        ? "text-primary font-semibold"
-        : "text-black hover:text-primary"
+        ? "text-black font-semibold"
+        : "text-black hover:text-blue"
     }`;
 
   return (
@@ -13,31 +13,31 @@ const Nav = () => {
       <h1 className="text-xl font-bold text-primary mb-8">Admin</h1>
 
       <nav className="space-y-4 flex flex-col">
-        <NavLink to="/admin/products" className={linkClasses}>
+        <NavLink to="/admin2/products" className={linkClasses}>
           Products
         </NavLink>
 
-        <NavLink to="/admin/categories" className={linkClasses}>
+        <NavLink to="/admin2/categories" className={linkClasses}>
           Categories
         </NavLink>
 
-        <NavLink to="/admin/subcategories" className={linkClasses}>
+        <NavLink to="/admin2/subcategories" className={linkClasses}>
           Subcategories
         </NavLink>
 
-        <NavLink to="/admin/mainoffers" className={linkClasses}>
+        <NavLink to="/admin2/mainoffers" className={linkClasses}>
           Main Offers
         </NavLink>
 
-        <NavLink to="/admin/offers" className={linkClasses}>
+        <NavLink to="/admin2/offers" className={linkClasses}>
           Offers
         </NavLink>
 
-        <NavLink to="/admin/orders" className={linkClasses}>
+        <NavLink to="/admin2/orders" className={linkClasses}>
           Orders
         </NavLink>
 
-        <NavLink to="/admin/users" className={linkClasses}>
+        <NavLink to="/admin2/users" className={linkClasses}>
           Users
         </NavLink>
       </nav>

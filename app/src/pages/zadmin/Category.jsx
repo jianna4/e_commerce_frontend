@@ -60,7 +60,7 @@ const AdminCategories = () => {
   };
 
   return (
-    <AdminLayout
+    <Admin2
       title="Categories"
       action={
         <button
@@ -137,7 +137,7 @@ const AdminCategories = () => {
           </button>
         </form>
       </AdminModal>
-    </AdminLayout>
+    </Admin2>
   );
 };
 

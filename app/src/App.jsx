@@ -42,13 +42,13 @@ function App() {
             <Route path="/category/:slug" element={<CategoryDetail />} />
             <Route path="/admin2" element={<Admin2 />} />
             {/* Admin routes */}
-            <Route path="/admin/subcategories" element={<AdminSubcategories />} />
-            <Route path="/admin/categories" element={<AdminCategories />} />
-            <Route path="/admin/products" element={<AdminProducts />} />
-            <Route path="/admin/mainoffers" element={<Mainoffers />} />
-            <Route path="/admin/offers" element={<Offers />} />
-            <Route path="/admin/users" element={<Users />} />
-            <Route path="/admin/orders" element={<Orders />} />
+            <Route path="/admin2/subcategories" element={<AdminSubcategories />} />
+            <Route path="/admin2/categories" element={<AdminCategories />} />
+            <Route path="/admin2/products" element={<AdminProducts />} />
+            <Route path="/admin2/mainoffers" element={<Mainoffers />} />
+            <Route path="/admin2/offers" element={<Offers />} />
+            <Route path="/admin2/users" element={<Users />} />
+            <Route path="/admin2/orders" element={<Orders />} />
 
            
           </Routes>
