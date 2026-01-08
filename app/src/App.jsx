@@ -13,6 +13,16 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Admin from './pages/Admin';
 import Admin2 from './pages/Admin2';
+
+//admin pages
+import AdminSubcategories from './pages/zadmin/Subcategory';
+import AdminCategories from './pages/zadmin/Category';
+import AdminProducts from './pages/zadmin/Products';
+import Mainoffers from './pages/zadmin/Mainoffers';
+import Offers from './pages/zadmin/Offer';
+import Users from './pages/zadmin/Users';
+import Orders from './pages/zadmin/Orders';
+
 function App() {
  
 //#5AB7E6

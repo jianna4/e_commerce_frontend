@@ -1,4 +1,4 @@
-const Offers = () => {
+const Users = () => {
  
 
   return (
@@ -8,4 +8,4 @@ const Offers = () => {
   );
 };
 
-export default Offers;
+export default Users;
