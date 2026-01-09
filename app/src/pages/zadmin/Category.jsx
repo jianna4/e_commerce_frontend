@@ -30,11 +30,20 @@ const AdminCategories = () => {
     e.preventDefault();
     const fd = new FormData();
     Object.entries(form).forEach(([k, v]) => v && fd.append(k, v));
+    fd.append("is_active", "true");
 
     if (editing) {
-      await api.put(`/products/categoryin/${editing.id}/`, fd);
+      await api.put(`/products/categoryin/${editing.id}/`, fd, {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+});
     } else {
-      await api.post("/products/categoryin/", fd);
+      await api.post("/products/categoryin/", fd, {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+});
     }
 
     setOpen(false);
@@ -97,7 +106,7 @@ const AdminCategories = () => {
         title={editing ? "Edit Category" : "New Category"}
         onClose={() => setOpen(false)}
       >
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 pb-10">
           <input
             className="w-full border p-2 rounded"
             placeholder="Name"
@@ -132,9 +141,22 @@ const AdminCategories = () => {
             setForm({ ...form, image: e.target.files[0] })
           } />
 
-          <button className="bg-primary text-white px-4 py-2 rounded w-full">
-            Save
-          </button>
+         <div className="border-t pt-4 flex justify-end gap-3">
+      <button
+        type="button"
+        onClick={() => setOpen(false)}
+        className="px-4 py-2 rounded border"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="submit"
+        className="px-4 py-2 rounded bg-primary text-black"
+      >
+        Save
+      </button>
+    </div>
         </form>
       </AdminModal>
     </Admin2>

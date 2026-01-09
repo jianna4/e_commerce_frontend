@@ -72,7 +72,7 @@ const MainOffers = () => {
           onClick={() => setOpen(true)}
           className="bg-primary text-black px-4 py-2 rounded"
         >
-          Add Category
+          Add Mainoffers
         </button>
       }
     >
