@@ -108,23 +108,22 @@ const AdminSubcategories = () => {
               </option>
             ))}
           </select>
-          <div className="border-t pt-4 flex justify-end gap-3">
-      <button
-        type="button"
-        onClick={() => setOpen(false)}
-        className="px-4 py-2 rounded border"
-      >
-        Cancel
-      </button>
+          <div className="flex justify-end gap-3 mt-4">
+           <button
+            type="button"
+           onClick={() => setOpen(false)}
+            className=" px-4 py-2 rounded-lg border border-gray-300 text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition focus:outline-none"
+   >
+            Cancel
+            </button>
 
-      <button
-        type="submit"
-        onClick={() => alert("Subcategory saved")}
-        className="px-4 py-2 rounded bg-primary text-black"
-      >
-        Save
-      </button>
-    </div>
+            <button
+              type="submit"
+              className=" px-4 py-2 rounded-lg bg-[#5AB7E6] text-white hover:bg-[#4aa8d4] shadow-md transition focus:outline-none"
+            >
+              Save
+            </button>
+          </div>
         </form>
       </AdminModal>
     </Admin2>

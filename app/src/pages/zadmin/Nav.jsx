@@ -2,17 +2,36 @@ import { NavLink } from "react-router-dom";
 
 const Nav = () => {
   const linkClasses = ({ isActive }) =>
-    `transition ${
-      isActive
-        ? "text-black font-semibold"
-        : "text-black hover:text-blue"
-    }`;
+    `
+      block rounded-lg px-4 py-2.5
+      text-sm font-medium
+      transition-all duration-200
+      ${
+        isActive
+          ? "bg-[#5AB7E6]/15 text-[#5AB7E6]"
+          : "text-gray-300 hover:bg-white/5 hover:text-white"
+      }
+    `;
 
   return (
-    <aside className="w-64 bg-dark text-white p-6">
-      <h1 className="text-xl font-bold text-primary mb-8">Admin</h1>
+    <aside className="
+      w-64 min-h-screen
+      bg-gray-800
+      border-r border-white/10
+      p-6
+    ">
+      {/* Title */}
+      <h1 className="
+        text-xl font-bold
+        text-[#5AB7E6]
+        mb-10
+        tracking-wide
+      ">
+        Admin Panel
+      </h1>
 
-      <nav className="space-y-4 flex flex-col">
+      {/* Navigation */}
+      <nav className="space-y-1">
         <NavLink to="/admin2/products" className={linkClasses}>
           Products
         </NavLink>

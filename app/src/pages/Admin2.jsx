@@ -1,24 +1,42 @@
-
 import Nav from "./zadmin/Nav.jsx";
 
 const Admin2 = ({ title, action, children }) => {
   return (
-    <div className="flex">
+    <div className="flex min-h-screen bg-[#F5F7FA]">
+      {/* Sidebar */}
       <Nav />
-      <div className="flex-1 min-h-screen bg-gray-100 p-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-semibold">
+
+      {/* Main Content */}
+      <main className="flex-1">
+        {/* Top Bar */}
+        <div className="
+          sticky top-0 z-30
+          bg-white/80 backdrop-blur
+          border-b border-gray-200
+        ">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <h1 className="text-xl font-semibold text-gray-800">
               {title}
             </h1>
             {action}
           </div>
+        </div>
 
-          <div className="bg-white rounded-lg shadow-sm border">
-            {children}
+        {/* Page Content */}
+        <div className="px-6 py-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="
+              bg-white
+              rounded-2xl
+              border border-gray-200
+              shadow-sm
+              p-6
+            ">
+              {children}
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
