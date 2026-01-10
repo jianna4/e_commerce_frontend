@@ -12,17 +12,48 @@ const AdminSubcategories = () => {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ name: "", category: "" });
 
+   const fetchSubcategories = async () => {
+    const res = await api.get("/products/subcategories/");
+    setItems(res.data);
+  };
+
+  const fetchCategories = async () => {
+    const res = await api.get("/products/categoryin/");
+    setCategories(res.data);
+  };
+
   useEffect(() => {
-    api.get("/products/subcategories/").then(r => setItems(r.data));
-    api.get("/products/categoryin/").then(r => setCategories(r.data));
+    fetchSubcategories();
+    fetchCategories();
   }, []);
 
   const submit = async e => {
     e.preventDefault();
+    
     editing
       ? await api.put(`/products/subcategoryin/${editing.id}/`, form)
       : await api.post("/products/subcategoryin/", form);
+     
+    await fetchSubcategories();
+
+    setEditing(null);
+    setForm({ name: "", category: "" });
     setOpen(false);
+  };
+   const handleDelete = async (id) => {
+    if (!confirm("Delete subcategory?")) return;
+    await api.delete(`/products/subcategoryin/${id}/`);
+    fetchSubcategories();
+  };
+
+  /* ---------------- EDIT ---------------- */
+  const handleEdit = (item) => {
+    setEditing(item);
+    setForm({
+      name: item.name,
+      category: item.category?.id || "",
+    });
+    setOpen(true);
   };
 
   return (
@@ -44,14 +75,8 @@ const AdminSubcategories = () => {
             render: (item) => item.category?.name ?? "_"
           }
         ]}
-        onEdit={i => {
-          setEditing(i);
-          setForm(i);
-          setOpen(true);
-        }}
-        onDelete={id =>
-          api.delete(`/products/subcategoryin/${id}/`)
-        }
+        onEdit={handleEdit}
+        onDelete={handleDelete}
 
       />
       <AdminModal
@@ -78,11 +103,28 @@ const AdminSubcategories = () => {
           >
             <option value="">Select Category</option>
             {categories.map(c => (
-              <option key={c.id} value={c.id}>
+              <option key={c.id} value={Number(c.id)}>
                 {c.name}
               </option>
             ))}
           </select>
+          <div className="border-t pt-4 flex justify-end gap-3">
+      <button
+        type="button"
+        onClick={() => setOpen(false)}
+        className="px-4 py-2 rounded border"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="submit"
+        onClick={() => alert("Subcategory saved")}
+        className="px-4 py-2 rounded bg-primary text-black"
+      >
+        Save
+      </button>
+    </div>
         </form>
       </AdminModal>
     </Admin2>

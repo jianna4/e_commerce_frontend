@@ -144,9 +144,22 @@ const MainOffers = () => {
             }
           />
 
-          <button className="bg-primary text-white px-4 py-2 rounded w-full">
-            Save
-          </button>
+          <div className="border-t pt-4 flex justify-end gap-3">
+      <button
+        type="button"
+        onClick={() => setOpen(false)}
+        className="px-4 py-2 rounded border"
+      >
+        Cancel
+      </button>
+
+      <button
+        type="submit"
+        className="px-4 py-2 rounded bg-primary text-black"
+      >
+        Save
+      </button>
+    </div>
         </form>
       </AdminModal>
     </Admin2>
