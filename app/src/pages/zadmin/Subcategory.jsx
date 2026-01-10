@@ -6,7 +6,7 @@ import api from "../../apis/axiosInstance";
 import { renderMatches } from "react-router-dom";
 
 const AdminSubcategories = () => {
-  const [items, setItems] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
   const [categories, setCategories] = useState([]);
   const [editing, setEditing] = useState(null);
   const [open, setOpen] = useState(false);
@@ -14,7 +14,7 @@ const AdminSubcategories = () => {
 
    const fetchSubcategories = async () => {
     const res = await api.get("/products/subcategories/");
-    setItems(res.data);
+    setSubcategories(res.data);
   };
 
   const fetchCategories = async () => {
@@ -68,7 +68,7 @@ const AdminSubcategories = () => {
       }>
       
       <AdminTable
-        data={items}
+        data={subcategories}
         columns={[
           { key: "name", label: "Name" },
           { key: "category", label: "Category",
