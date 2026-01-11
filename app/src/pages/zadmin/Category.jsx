@@ -108,6 +108,7 @@ const AdminCategories = () => {
         onClose={() => setOpen(false)}
       >
         <form onSubmit={handleSubmit} className="space-y-4 pb-10">
+          <label className="text-sm">Name</label>
           <input
             className="w-full border p-2 rounded"
             placeholder="Name"
@@ -122,13 +123,13 @@ const AdminCategories = () => {
             }}
             required
           />
-
+          <label className="text-sm">Slug</label>
           <input
             className="w-full border p-2 rounded bg-gray-100"
             value={form.slug}
             disabled={!!editing}  
           />
-
+          <label className="text-sm">Description</label>
           <textarea
             className="w-full border p-2 rounded"
             placeholder="Description"
@@ -137,7 +138,7 @@ const AdminCategories = () => {
               setForm({ ...form, description: e.target.value })
             }
           />
-
+          <label className="text-sm">Image</label>
           <input type="file" onChange={(e) =>
             setForm({ ...form, image: e.target.files[0] })
           } />

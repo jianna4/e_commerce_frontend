@@ -90,12 +90,14 @@ const AdminSubcategories = () => {
         onSubmit={submit}
       >
         <form onSubmit={submit} className="space-y-4">
+          <label className="text-sm">Name</label>
           <input
             className="w-full border p-2 rounded"
             placeholder="Name"
             value={form.name}
             onChange={e => setForm({ ...form, name: e.target.value })}
           />
+          <label className="text-sm">Category</label>
           <select
             className="w-full border p-2 rounded"
             value={form.category}

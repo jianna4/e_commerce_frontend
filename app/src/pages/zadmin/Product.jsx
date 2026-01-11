@@ -10,7 +10,7 @@ const Products = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [editing, setEditing] = useState(null);
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", slug: "", description: "", image: "", price: "", category: "", subcategory: "" });
+  const [form, setForm] = useState({ name: "", slug: "", description: "", image: "", price: "", subcategory: "" });
 
 
   const fetchProducts = async () => {
@@ -36,15 +36,29 @@ const Products = () => {
 
   const submit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    Object.entries(form).forEach(([key, value]) => {
+    if (value !== "" && value !== null) {
+      formData.append(key, value);
+    }
+  });
 
     editing
-      ? await api.put(`/products/productin/${editing.id}/`, form)
-      : await api.post("/products/productin/", form);
+      ? await api.put(`/products/productin/${editing.id}/`, formData, {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+})
+      : await api.post("/products/productin/", formData, {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+});
 
     await fetchProducts();
 
     setEditing(null);
-    setForm({ name: "", slug: "", description: "",image: "",  price: "", category: "", subcategory: "" });
+    setForm({ name: "", slug: "", description: "", image: null, price: "", subcategory: "" });
     setOpen(false);
   };
 
@@ -59,7 +73,10 @@ const Products = () => {
     setEditing(item);
     setForm({
       name: item.name,
-      category: item.category?.id || "",
+      slug: item.slug,
+      description: item.description,
+      image: null,
+      price: item.price,
       subcategory: item.subcategory?.id || "",
     });
     setOpen(true);
@@ -109,7 +126,7 @@ const Products = () => {
         onClose={() => {
           setOpen(false);
           setEditing(null);
-          setForm({ name: "", category: "", subcategory: "" });
+          setForm({ name: "", slug: "", description: "", image: null, price: "", subcategory: "" });
         }}
         onSubmit={submit}
       >
@@ -133,7 +150,7 @@ const Products = () => {
           <input
             className="w-full border p-2 rounded"
             value={form.slug}
-            ondisabled={!!editing}
+            disabled={!!editing}
           />
           <label className="text-sm">Description</label>
           <textarea
@@ -154,19 +171,7 @@ const Products = () => {
             value={form.price}
             onChange={e => setForm({ ...form, price: e.target.value })}
           />
-          <label className="text-sm">Category</label>
-          <select
-            className="w-full border p-2 rounded"
-            value={form.category}
-            onChange={e => setForm({ ...form, category: e.target.value })}
-          >
-            <option value="">Select Category</option>
-            {categories.map(c => (
-              <option key={c.id} value={Number(c.id)}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+          
           <label className="text-sm">Subcategory</label>
           <select
             className="w-full border p-2 rounded"
