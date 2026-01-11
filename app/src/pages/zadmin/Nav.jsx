@@ -32,31 +32,31 @@ const Nav = () => {
 
       {/* Navigation */}
       <nav className="space-y-1">
-        <NavLink to="/admin2/products" className={linkClasses}>
+        <NavLink to="/admin/products" className={linkClasses}>
           Products
         </NavLink>
 
-        <NavLink to="/admin2/categories" className={linkClasses}>
+        <NavLink to="/admin/categories" className={linkClasses}>
           Categories
         </NavLink>
 
-        <NavLink to="/admin2/subcategories" className={linkClasses}>
+        <NavLink to="/admin/subcategories" className={linkClasses}>
           Subcategories
         </NavLink>
 
-        <NavLink to="/admin2/mainoffers" className={linkClasses}>
+        <NavLink to="/admin/mainoffers" className={linkClasses}>
           Main Offers
         </NavLink>
 
-        <NavLink to="/admin2/offers" className={linkClasses}>
+        <NavLink to="/admin/offers" className={linkClasses}>
           Offers
         </NavLink>
 
-        <NavLink to="/admin2/orders" className={linkClasses}>
+        <NavLink to="/admin/orders" className={linkClasses}>
           Orders
         </NavLink>
 
-        <NavLink to="/admin2/users" className={linkClasses}>
+        <NavLink to="/admin/users" className={linkClasses}>
           Users
         </NavLink>
       </nav>

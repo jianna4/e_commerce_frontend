@@ -1,4 +1,4 @@
-const AdminTable = ({ columns, data, onEdit, onDelete }) => {
+const AdminTable = ({ columns, data, onEdit, onDelete, onRowClick }) => {
   return (
     <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
       <table className="w-full text-sm text-gray-800">
@@ -36,6 +36,7 @@ const AdminTable = ({ columns, data, onEdit, onDelete }) => {
           {data.map((item, index) => (
             <tr
               key={item.id}
+              onClick={() => onRowClick?.(item)}
               className={`
                 border-b border-gray-100
                 transition-all duration-200

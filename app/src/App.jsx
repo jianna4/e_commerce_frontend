@@ -11,7 +11,7 @@ import Login  from './pages/Login';
 import Signup from './pages/Signup';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Admin from './pages/Admin';
+
 import Admin2 from './pages/Admin2';
 
 //admin pages
@@ -22,6 +22,7 @@ import Mainoffers from './pages/zadmin/Mainoffers';
 import Offers from './pages/zadmin/Offer';
 import Users from './pages/zadmin/Users';
 import Orders from './pages/zadmin/Orders';
+import ProductDetails from './pages/zadmin/Productdetail';
 
 function App() {
  
@@ -38,19 +39,19 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/Admin" element={<Admin />} />
-            <Route path="/category/:slug" element={<CategoryDetail />} />
-            <Route path="/admin2" element={<Admin2 />} />
-            {/* Admin routes */}
-            <Route path="/admin2/subcategories" element={<AdminSubcategories />} />
-            <Route path="/admin2/categories" element={<AdminCategories />} />
-            <Route path="/admin2/products" element={<AdminProducts />} />
-            <Route path="/admin2/mainoffers" element={<Mainoffers />} />
-            <Route path="/admin2/offers" element={<Offers />} />
-            <Route path="/admin2/users" element={<Users />} />
-            <Route path="/admin2/orders" element={<Orders />} />
-
            
+            <Route path="/category/:slug" element={<CategoryDetail />} />
+            <Route path="/admin" element={<Admin2 />} />
+            {/* Admin routes */}
+            <Route path="/admin/subcategories" element={<AdminSubcategories />} />
+            <Route path="/admin/categories" element={<AdminCategories />} />
+            <Route path="/admin/products" element={<AdminProducts />} />
+            <Route path="/admin/mainoffers" element={<Mainoffers />} />
+            <Route path="/admin/offers" element={<Offers />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/orders" element={<Orders />} />
+            <Route path="/admin/products/:id" element={<ProductDetails />} />
+
           </Routes>
         </main>
         <Footer />

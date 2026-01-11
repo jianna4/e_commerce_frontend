@@ -3,8 +3,11 @@ import AdminModal from "./Modal";
 import Admin2 from "../Admin2";
 import AdminTable from "./Admintable";
 import api from "../../apis/axiosInstance";
+
+import { useNavigate } from "react-router-dom";
+
 const Products = () => {
- 
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
@@ -119,6 +122,7 @@ const Products = () => {
         ]}
         onEdit={handleEdit}
         onDelete={handleDelete}
+        onRowClick={(item) => navigate(`/admin2/products/${item.id}`)}
       />
       <AdminModal
         title={editing ? "Edit Product" : "Add Product"}
