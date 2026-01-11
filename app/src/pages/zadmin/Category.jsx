@@ -84,6 +84,7 @@ const AdminCategories = () => {
         columns={[
           { key: "name", label: "Name" },
           { key: "slug", label: "Slug" },
+         
           {
             key: "image",
             label: "Image",

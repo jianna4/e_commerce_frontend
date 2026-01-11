@@ -10,7 +10,7 @@ const Products = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [editing, setEditing] = useState(null);
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({ name: "", category: "", subcategory: "" });
+  const [form, setForm] = useState({ name: "", slug: "", description: "", image: "", price: "", category: "", subcategory: "" });
 
 
   const fetchProducts = async () => {
@@ -44,7 +44,7 @@ const Products = () => {
     await fetchProducts();
 
     setEditing(null);
-    setForm({ name: "", category: "", subcategory: "" });
+    setForm({ name: "", slug: "", description: "",image: "",  price: "", category: "", subcategory: "" });
     setOpen(false);
   };
 
@@ -80,6 +80,19 @@ const Products = () => {
         data={products}
         columns={[
           { key: "name", label: "Name" },
+          { key: "slug", label: "Slug" },
+         
+          {
+            key: "image",
+            label: "Image",
+            render: (c) =>
+              c.image ? (
+                <img src={c.image} className="w-10 h-10 object-cover rounded" />
+              ) : (
+                "-"
+              ),
+          },
+          { key: "price", label: "Price" },
           { key: "category", label: "Category",
             render: (item) => item.category?.name ?? "_"
           },
@@ -101,12 +114,47 @@ const Products = () => {
         onSubmit={submit}
       >
         <form onSubmit={submit} className="space-y-4">
+          <label className="text-sm">Name</label>
           <input
             className="w-full border p-2 rounded"
             placeholder="Name"
+           
             value={form.name}
-            onChange={e => setForm({ ...form, name: e.target.value })}
+            onChange={(e) => {
+              const name = e.target.value;
+              setForm({
+                ...form,
+                name,
+                slug: editing ? form.slug : name.toLowerCase().replace(/\s+/g, "-"),
+              });
+            }}
           />
+          <label className="text-sm">Slug</label>
+          <input
+            className="w-full border p-2 rounded"
+            value={form.slug}
+            ondisabled={!!editing}
+          />
+          <label className="text-sm">Description</label>
+          <textarea
+            className="w-full border p-2 rounded"
+            value={form.description}
+            onChange={e => setForm({ ...form, description: e.target.value })}
+          />
+          <label className="text-sm">Image</label>
+          <input
+            type="file"
+            className="w-full border p-2 rounded"
+            onChange={e => setForm({ ...form, image: e.target.files[0] })}
+          />
+          <label className="text-sm">Price</label>
+          <input
+            type="number"
+            className="w-full border p-2 rounded"
+            value={form.price}
+            onChange={e => setForm({ ...form, price: e.target.value })}
+          />
+          <label className="text-sm">Category</label>
           <select
             className="w-full border p-2 rounded"
             value={form.category}
@@ -119,6 +167,7 @@ const Products = () => {
               </option>
             ))}
           </select>
+          <label className="text-sm">Subcategory</label>
           <select
             className="w-full border p-2 rounded"
             value={form.subcategory}
