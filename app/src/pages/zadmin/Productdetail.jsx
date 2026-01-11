@@ -2,6 +2,10 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../apis/axiosInstance";
 
+import ProductOffers from "../../components/productadmin/product offers";
+import ProductSizes from "../../components/productadmin/prodtsizes";
+import MainProduct from "../../components/productadmin/mainproduct";
+
 const ProductDetails = () => {
 
 

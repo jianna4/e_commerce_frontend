@@ -122,7 +122,7 @@ const Products = () => {
         ]}
         onEdit={handleEdit}
         onDelete={handleDelete}
-        onRowClick={(item) => navigate(`/admin2/products/${item.id}`)}
+        onRowClick={(item) => navigate(`/admin/products/${item.id}`)}
       />
       <AdminModal
         title={editing ? "Edit Product" : "Add Product"}
