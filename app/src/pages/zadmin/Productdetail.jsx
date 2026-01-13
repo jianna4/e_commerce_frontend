@@ -231,8 +231,11 @@ const ProductDetails = () => {
     setEditingItem(null);
   };
   
+  if (loading) return <div className="p-6">Loading product...</div>;
+  if (!product) return <div className="p-6">Product not found.</div>;
 
-  const imageUrl = product.image
+
+  const imageUrl = product?.image
     ? product.image.startsWith("http")
       ? product.image
       : `${api.defaults.baseURL}${product.image}`
