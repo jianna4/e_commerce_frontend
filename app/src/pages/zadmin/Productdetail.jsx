@@ -2,21 +2,68 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../apis/axiosInstance";
 
-import ProductOffers from "../../components/productadmin/product offers";
-import ProductSizes from "../../components/productadmin/prodtsizes";
-import MainProduct from "../../components/productadmin/mainproduct";
+
+
 
 const ProductDetails = () => {
 
+  const{id} = useParams()
+  const[open,setOpen]=useState(false);
+  const[editing,setEditing]=useState(null);
+  const [product,setProduct]=useState(null);
+  const[sizesform,setSizesform] =useState({
+    waist_shoe_size:"",
+    hips:"",
+    height:"",
+    product:"",
+  })
+  const[colorform,setColorform]= useState({
+    product_size:"",
+    color_name:"",
+    hex_code:"",
+    quantity:"",
 
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  })
+  const[imagesform,setImagesform] = useState({
+    product:"",
+    image:"",
+  })
+  const [form, setForm] = useState({
+    name:"",
+    slug:"",
+    description:"",
+    price:"",
+    image:null,
+    active_offers:[{new_price:"",
+                    mainoffer:[{title:"",
+                                description:""}]}]
+  });
+
+  const fetchProducts = async () => {
+    try {
+      const res = await api.get(`/products/products/${id}/`);
+      setProduct(res.data);
+      // preload main form
+      setForm({
+        name: res.data.name,
+        slug: res.data.slug,
+        description: res.data.description,
+        price: res.data.price,
+        stock: res.data.stock,
+        image: null,
+      });
+    } catch (err) {
+      console.error("Failed to fetch products", err);
+    }finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    api.get(`/products/productin/${id}/`).then(res => {
-      setProduct(res.data);
-    });
+    fetchProducts()
   }, [id]);
+
+
 
   if (!product) return <p>Loading...</p>;
 
@@ -28,11 +75,8 @@ const ProductDetails = () => {
 
       <p className="mt-2">{product.description}</p>
 
-      {/* MORE STAFF HERE 👇 */}
-      {/* stock management */}
-      {/* offers */}
-      {/* variants */}
-      {/* analytics */}
+      {product.price}
+      
     </div>
   );
 };
